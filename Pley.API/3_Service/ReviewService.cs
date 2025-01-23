@@ -16,7 +16,7 @@ public class ReviewService : IReviewService
     public ReviewOutDTO CreateNewReview(ReviewInDTO newReviewInDTO)
     {
         var review = _utility.ReviewInDTOToReview(newReviewInDTO);
-        review.Time = DateTime.UtcNow;
+        review.LastUpdated = DateTime.UtcNow;
         var newReview = _reviewRepo.CreateNewReview(review);        
         return _utility.ReviewToReviewOutDTO(newReview);
     }

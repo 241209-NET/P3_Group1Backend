@@ -18,6 +18,7 @@ public interface IReviewService
     ReviewOutDTO? GetReviewById(int id);
     IEnumerable<ReviewOutDTO> GetAllReviews();
     ReviewOutDTO CreateNewReview(ReviewInDTO newReview);
+    ReviewOutDTO? DeleteReviewById(int id);
 }
 
 public interface ICustomerService

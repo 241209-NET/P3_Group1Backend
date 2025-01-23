@@ -45,8 +45,30 @@ public class ReviewController : ControllerBase
     {
         var review = _reviewService.CreateNewReview(newReviewInDTO);
         if(review is null){
-            return BadRequest("Wrong format input for createNewReview");
+            return BadRequest("improper input.");
         }
         return Ok(review);
     }
+
+    [HttpDelete("{id}")]
+    public IActionResult DeleteUserById(int id)
+    {
+        try
+        {
+            var user = _reviewService.DeleteReviewById(id);
+            if (user == null)
+            {
+                return NotFound($"No review found to delete for id = " + id);
+            }
+            return Ok(user);
+        }
+        catch(Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    // TODO:
+    // put review
+    // delete review
 }
