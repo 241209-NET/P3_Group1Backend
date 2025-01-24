@@ -11,7 +11,7 @@ public class Utility
         return new StoreOutDTO
         {
             Id = store.Id,
-            Username = store.Username
+            Username = store.Username!
         };
     }
 
