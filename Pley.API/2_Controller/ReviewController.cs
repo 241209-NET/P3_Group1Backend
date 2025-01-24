@@ -16,7 +16,7 @@ public class ReviewController : ControllerBase
     {
         var reviewList = _reviewService.GetAllReviews();
         if(reviewList is null || !reviewList.Any()) 
-            return NotFound("No reviews found"); //throw new ReviewNotFoundException();
+            return NotFound("No reviews found"); 
 
         return Ok(reviewList);
     }
@@ -67,7 +67,24 @@ public class ReviewController : ControllerBase
         }
     }
 
+        [HttpDelete("{id}"!)]
+    public IActionResult DeleteReviewById(int id)
+    {
+        try
+        {
+            var user = _reviewService.DeleteReviewById(id);
+            if (user == null)
+            {
+                return NotFound($"No review found to delete for id = " + id);
+            }
+            return Ok(user);
+        }
+        catch(Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
     // TODO:
     // put review
-    // delete review
 }

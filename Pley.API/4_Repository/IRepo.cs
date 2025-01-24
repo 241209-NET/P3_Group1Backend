@@ -30,3 +30,16 @@ public interface IReviewRepo
     Review CreateNewReview(Review newReview);
 
 }
+
+public interface ICustomerRepo
+{
+
+    Customer? GetCustomerById(int id);
+
+    IEnumerable<Customer> GetAllCustomers(); 
+
+    Customer? DeleteReviewById(int id);
+
+    Customer CreateNewCustomer(Customer newCustomer);
+
+}

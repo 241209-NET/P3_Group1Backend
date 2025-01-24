@@ -53,4 +53,24 @@ public class Utility
     // public DateTime Time { get; set; }
     // public int Rating { get; set; }
     }
+
+    public CustomerOutDTO CustomerToCustomerOutDTO(Customer customer)
+    {
+        return new CustomerOutDTO()
+        {
+            Id = customer.Id,
+            Name = customer.Name,
+            AvgRating = customer.AvgRating,
+        };
+    }
+
+    public Customer CustomerInDTOToCustomer(CustomerInDTO customer)
+    {
+        return new Customer()
+        {
+            Id = customer.Id,
+            Name = customer.Name!,
+            AvgRating = 0
+        };
+    }
 }

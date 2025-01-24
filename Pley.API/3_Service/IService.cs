@@ -25,5 +25,5 @@ public interface ICustomerService
 {
     CustomerOutDTO? GetCustomerById(int id);
     IEnumerable<CustomerOutDTO> GetAllCustomers();
-    CustomerOutDTO CreateNewCustomer(Customer customer);
+    CustomerOutDTO CreateNewCustomer(CustomerInDTO customer);
 }

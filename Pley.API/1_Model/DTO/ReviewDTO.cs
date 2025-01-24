@@ -17,6 +17,6 @@ public class ReviewOutDTO
     public int CustomerId { get; set; }
     public int StoreId { get; set; }
     public int Rating { get; set; }
-    public DateTime Time { get; set;  }
-    // public CustomerOutDTO? Customer { get; set; }
+    public DateTime LastUpdated { get; set; }
+    // public Customer? Customer { get; set; }
 }
