@@ -34,3 +34,4 @@ WORKDIR /app
 COPY --from=build /app/out ./ 
 # ENTRYPOINT commands are the first/default action when creating the container
 ENTRYPOINT ["dotnet", "./Pley.API.dll"]
+
