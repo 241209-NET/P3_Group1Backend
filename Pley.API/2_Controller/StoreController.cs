@@ -82,6 +82,12 @@ public class StoreController : ControllerBase
         }
     }
 
+    [HttpGet("home")]
+    public IActionResult Home()
+    {
+        return Ok("this works");
+    }
+
     [HttpGet]
     public IActionResult GetAllStores()
     {
