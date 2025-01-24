@@ -110,4 +110,8 @@ public class StoreController : ControllerBase
             return BadRequest(e.Message);
         }
     }
+
+    // edit store
+    // patch - store name, description, URL
+    // patch - username, password
 }
