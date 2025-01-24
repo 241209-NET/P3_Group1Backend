@@ -31,7 +31,7 @@ public class Utility
             Comment = review.Comment,
             CustomerId = review.CustomerId,
             StoreId = review.StoreId,
-            Time = review.LastUpdated,
+            LastUpdated = review.LastUpdated,
             Rating = review.Rating
         };
     }
@@ -45,13 +45,6 @@ public class Utility
             StoreId = reviewInDTO.StoreId,
             Rating = reviewInDTO.Rating
         };
-
-    //         public int Id { get; set; }
-    // public int StoreId { get; set; }
-    // public int CustomerId { get; set; }
-    // public required string Comment { get; set; }
-    // public DateTime Time { get; set; }
-    // public int Rating { get; set; }
     }
 
     public CustomerOutDTO CustomerToCustomerOutDTO(Customer customer)
