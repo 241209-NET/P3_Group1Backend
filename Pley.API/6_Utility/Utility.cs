@@ -31,7 +31,7 @@ public class Utility
             Comment = review.Comment,
             CustomerId = review.CustomerId,
             StoreId = review.StoreId,
-            Time = review.Time,
+            Time = review.LastUpdated,
             Rating = review.Rating
         };
     }
