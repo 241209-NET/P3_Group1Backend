@@ -10,6 +10,6 @@ public class Review
     public required string Comment { get; set; }
     public int Rating { get; set; }
     public DateTime LastUpdated { get; set; }
-    public Customer? Customer { get; set; }
-    public Store? Store { get; set; }
+    public Customer Customer { get; set; }
+    public Store Store { get; set; }
 }
