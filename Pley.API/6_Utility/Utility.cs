@@ -29,7 +29,7 @@ public class Utility
         return new ReviewOutDTO
         {
             Comment = review.Comment,
-            CustomerId = review.CustomerId,
+            CustomerId = review.CustomerId, 
             StoreId = review.StoreId,
             LastUpdated = review.LastUpdated,
             Rating = review.Rating
