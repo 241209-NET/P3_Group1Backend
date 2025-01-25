@@ -23,7 +23,7 @@ public interface IReviewService
 
 public interface ICustomerService
 {
-    CustomerOutDTO? GetCustomerById(int id);
-    IEnumerable<CustomerOutDTO> GetAllCustomers();
-    CustomerOutDTO CreateNewCustomer(CustomerInDTO customer);
+    IEnumerable<Customer> GetAllCustomers();
+    Customer? GetCustomerById(int id);
+    Customer? GetCustomerByName(string name);
 }

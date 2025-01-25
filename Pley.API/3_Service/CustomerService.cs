@@ -17,35 +17,35 @@ public class CustomerService : ICustomerService
         _utility = utility;
     }
 
-    public CustomerOutDTO CreateNewCustomer(CustomerInDTO newCustomerInDTO)
-    {
-        var customer = _utility.CustomerInDTOToCustomer(newCustomerInDTO);
-
-        var newCustomer = _customerRepo.CreateNewCustomer(customer);        
-        return _utility.CustomerToCustomerOutDTO(newCustomer);
-    }
-
-    public IEnumerable<CustomerOutDTO> GetAllCustomers()
+    public IEnumerable<Customer> GetAllCustomers()
     {
         var customers = _customerRepo.GetAllCustomers();
 
         if (customers == null)
-            throw null!;
-
-        List<CustomerOutDTO> list = new List<CustomerOutDTO>();
-        foreach(var customer in customers)
         {
-            var dto = _utility.CustomerToCustomerOutDTO(customer);
-            list.Add(dto);
+            return null!;
         }
 
-        return list;
+        return customers;
     }
 
-    public CustomerOutDTO GetCustomerById(int id)
+    public Customer? GetCustomerById(int id)
     {
         var customer = _customerRepo.GetCustomerById(id);
-        var dto = _utility.CustomerToCustomerOutDTO(customer!);
-        return dto;
+        if (customer == null)
+        {
+            return null;
+        }
+        return customer;
+    }
+
+    public Customer? GetCustomerByName(string name)
+    {
+        var customer = _customerRepo.GetCustomerByName(name);
+        if (customer == null)
+        {
+            return null;
+        }
+        return customer;
     }
 }
