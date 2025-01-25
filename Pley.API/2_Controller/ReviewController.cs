@@ -6,10 +6,10 @@ namespace Pley.API.Controller;
 
 [Route("api/[controller]")]
 [ApiController]
-public class ReviewController : ControllerBase
+public class ReviewsController : ControllerBase
 {
     private readonly IReviewService _reviewService;
-    public ReviewController(IReviewService reviewService) => _reviewService = reviewService;
+    public ReviewsController(IReviewService reviewService) => _reviewService = reviewService;
 
     [HttpGet]
     public IActionResult GetAllReviews()

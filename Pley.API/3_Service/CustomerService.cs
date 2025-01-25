@@ -27,6 +27,11 @@ public class CustomerService : ICustomerService
         {
             return null!;
         }
+        
+        foreach (var c in customers)
+        {
+            AvgRatingHelper(c);
+        }
 
         return customers;
     }
@@ -39,9 +44,7 @@ public class CustomerService : ICustomerService
             return null;
         }
 
-        List<Review> list = _reviewRepo.GetAllReviews().Where(r => r.CustomerId == id).ToList();
-
-        customer.AvgRating = _utility.GetAvgRating(list);
+        AvgRatingHelper(customer);
         return customer;
     }
 
@@ -52,6 +55,14 @@ public class CustomerService : ICustomerService
         {
             return null;
         }
+        AvgRatingHelper(customer);
         return customer;
+    }
+
+    public void AvgRatingHelper(Customer customer)
+    {
+        List<Review> list = _reviewRepo.GetAllReviews().Where(r => r.CustomerId == customer.Id).ToList();
+
+        customer.AvgRating = _utility.GetAvgRating(list);
     }
 }

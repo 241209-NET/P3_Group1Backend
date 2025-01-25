@@ -6,10 +6,10 @@ namespace Pley.API.Controller;
 
 [Route("api/[controller]")]
 [ApiController]
-public class CustomerController : ControllerBase
+public class CustomersController : ControllerBase
 {
     private readonly ICustomerService _customerService;
-    public CustomerController(ICustomerService customerService) => _customerService = customerService;
+    public CustomersController(ICustomerService customerService) => _customerService = customerService;
 
     [HttpGet]
     public IActionResult GetAllCustomers()
