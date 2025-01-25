@@ -36,6 +36,14 @@ builder.Services.AddControllers()
 
 var app = builder.Build();
 
+// Call the DbInitializer to seed the database (if needed).
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<PleyContext>();
+    DbInitializer.Initialize(context); // Initialize and seed the database
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
