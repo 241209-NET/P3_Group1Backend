@@ -47,23 +47,5 @@ public class Utility
         };
     }
 
-    public CustomerOutDTO CustomerToCustomerOutDTO(Customer customer)
-    {
-        return new CustomerOutDTO()
-        {
-            Id = customer.Id,
-            Name = customer.Name,
-            AvgRating = customer.AvgRating,
-        };
-    }
-
-    public Customer CustomerInDTOToCustomer(CustomerInDTO customer)
-    {
-        return new Customer()
-        {
-            Id = customer.Id,
-            Name = customer.Name!,
-            AvgRating = 0
-        };
-    }
+    
 }
