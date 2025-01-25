@@ -16,7 +16,9 @@ public class ReviewsController : ControllerBase
     {
         var reviewList = _reviewService.GetAllReviews();
         if(reviewList is null || !reviewList.Any()) 
+        {
             return NotFound("No reviews found"); 
+        }
 
         return Ok(reviewList);
     }
@@ -29,8 +31,9 @@ public class ReviewsController : ControllerBase
             var review = _reviewService.GetReviewById(reviewId);
             if(review is null)
             {
-                return NotFound("No reviews found for reviewId = " + reviewId);
+                return NotFound($"No review found for Id {reviewId}");
             }
+
             return Ok(review);
         }
         catch(Exception e)
@@ -39,27 +42,47 @@ public class ReviewsController : ControllerBase
         }
     }
 
+    // [HttpPost]
+    // public IActionResult CreateNewReview([FromBody] ReviewInDTO newReviewInDTO)
+    // {
+    //     var review = _reviewService.CreateNewReview(newReviewInDTO);
+    //     if(review is null){
+    //         return BadRequest("improper input.");
+    //     }
+    //     return Ok(review);
+    // }
+
     [HttpPost]
-    public IActionResult CreateNewReview([FromBody] ReviewInDTO newReviewInDTO)
-    {
-        var review = _reviewService.CreateNewReview(newReviewInDTO);
-        if(review is null){
-            return BadRequest("improper input.");
-        }
-        return Ok(review);
-    }
-
-    [HttpDelete("{id}")]
-    public IActionResult DeleteUserById(int id)
+    public IActionResult CreateNewReview([FromBody] ReviewInDTO reviewIn)
     {
         try
         {
-            var user = _reviewService.DeleteReviewById(id);
-            if (user == null)
+            // var customerId = find a way to get customerId 
+            // var storeId = find a way to get storeId from authentication
+            var review = _reviewService.CreateNewReview(reviewIn, storeId, customerId);
+            if (review is null)
             {
-                return NotFound($"No review found to delete for id = " + id);
+                return BadRequest("Invalid input");
             }
-            return Ok(user);
+            return Ok(review);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpDelete("{reviewId}")]
+    public IActionResult DeleteReviewById(int reviewId)
+    {
+        try
+        {
+            var deleteReview = _reviewService.DeleteReviewById(reviewId);
+            if (deleteReview == null)
+            {
+                return NotFound($"No review found with Id {reviewId}");
+            }
+            return Ok($"Successfully deleted review {reviewId}");
         }
         catch(Exception e)
         {
@@ -67,24 +90,24 @@ public class ReviewsController : ControllerBase
         }
     }
 
-        [HttpDelete("{id}"!)]
-    public IActionResult DeleteReviewById(int id)
+    [HttpPatch("reviewId")]
+    public IActionResult EditReviewById(int reviewId, [FromBody] ReviewInDTO reviewIn)
     {
-        try
+        try 
         {
-            var user = _reviewService.DeleteReviewById(id);
-            if (user == null)
+            var existingReview = _reviewService.GetReviewById(reviewId);
+            if (existingReview == null)
             {
-                return NotFound($"No review found to delete for id = " + id);
+                return NotFound($"No review found with Id {reviewId}");
             }
-            return Ok(user);
+
+            var editReview = _reviewService.EditReviewById(reviewId, reviewIn);
+
+            return Ok(editReview);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             return BadRequest(e.Message);
         }
     }
-
-    // TODO:
-    // put review
 }

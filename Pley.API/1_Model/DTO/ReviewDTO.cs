@@ -2,12 +2,17 @@ using Pley.API.Model;
 
 namespace Pley.API.DTO;
 
+// public class ReviewInDTO
+// {
+//     public required string Comment { get; set; }
+//     public int CustomerId { get; set; }
+//     public int StoreId { get; set; }
+//     public int Rating { get; set; }
+// }
 public class ReviewInDTO
 {
-    public required string Comment { get; set; }
-    public int CustomerId { get; set; }
-    public int StoreId { get; set; }
     public int Rating { get; set; }
+    public required string Comment { get; set; }
 }
 
 public class ReviewOutDTO

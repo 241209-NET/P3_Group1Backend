@@ -37,16 +37,29 @@ public class Utility
         };
     }
 
-    public Review ReviewInDTOToReview(ReviewInDTO reviewInDTO)
+    // public Review ReviewInDTOToReview(ReviewInDTO reviewInDTO)
+    // {
+    //     return new Review
+    //     {
+    //         Comment = reviewInDTO.Comment,
+    //         CustomerId = reviewInDTO.CustomerId,
+    //         StoreId = reviewInDTO.StoreId,
+    //         Rating = reviewInDTO.Rating
+    //     };
+    // }
+
+    public Review ReviewInDTOToReview(ReviewInDTO reviewInDTO, int customerId, int storeId)
     {
         return new Review
         {
+            Rating = reviewInDTO.Rating,
             Comment = reviewInDTO.Comment,
-            CustomerId = reviewInDTO.CustomerId,
-            StoreId = reviewInDTO.StoreId,
-            Rating = reviewInDTO.Rating
+            CustomerId = customerId,
+            StoreId = storeId,
+            LastUpdated = DateTime.Now
         };
     }
+
 
 
     public double GetAvgRating(List<Review> list)

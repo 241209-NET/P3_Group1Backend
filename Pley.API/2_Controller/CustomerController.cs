@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Pley.API.Service;
-using Pley.API.Model;
 
 namespace Pley.API.Controller;
 
@@ -23,25 +22,6 @@ public class CustomersController : ControllerBase
         return Ok(customerList);
     }
 
-    [HttpGet("{customerId}")]
-    public IActionResult GetCustomerById(int customerId)
-    {
-        try
-        {
-            var customer = _customerService.GetCustomerById(customerId);
-            if(customer is null)
-            {
-                return NotFound("No customer found for Id = " + customerId);
-            }
-            
-            return Ok(customer);
-        }
-        catch(Exception e)
-        {
-            return BadRequest(e.Message);
-        }
-    }
-
     [HttpGet("name/{name}")]
     public IActionResult GetCustomerByName(string name)
     {
@@ -51,6 +31,25 @@ public class CustomersController : ControllerBase
             return Ok(findCustomer);
         }
         catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpGet("{customerId}")]
+    public IActionResult GetCustomerById(int customerId)
+    {
+        try
+        {
+            var customer = _customerService.GetCustomerById(customerId);
+            if(customer is null)
+            {
+                return NotFound($"No customer found with Id {customerId}");
+            }
+            
+            return Ok(customer);
+        }
+        catch(Exception e)
         {
             return BadRequest(e.Message);
         }
