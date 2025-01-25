@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Pley.API.DTO;
 using Pley.API.Model;
 using Pley.API.Service;
@@ -47,5 +48,16 @@ public class Utility
         };
     }
 
-    
+
+    public double GetAvgRating(List<Review> list)
+    {
+        double sum = 0;
+        foreach(var review in list)
+        {
+            sum += review.Rating;
+        }
+        if (list.Count > 0) return sum / list.Count;
+
+        return 0;
+    }
 }
