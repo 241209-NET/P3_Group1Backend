@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<coverage line-rate="0.1567" branch-rate="0.2968" version="1.9" timestamp="1737884507" lines-covered="111" lines-valid="708" branches-covered="19" branches-valid="64">
+<coverage line-rate="0.168" branch-rate="0.3281" version="1.9" timestamp="1737884970" lines-covered="119" lines-valid="708" branches-covered="21" branches-valid="64">
   <sources>
     <source>D:\Rev programming\P3_Group1Backend\Pley.API\</source>
   </sources>
   <packages>
-    <package name="Pley.API" line-rate="0.1567" branch-rate="0.2968" complexity="135">
+    <package name="Pley.API" line-rate="0.168" branch-rate="0.3281" complexity="135">
       <classes>
         <class name="Program" filename="Program.cs" line-rate="0" branch-rate="0" complexity="2">
           <methods>
@@ -714,13 +714,13 @@
           <methods>
             <method name="StoreToStoreOutDTO" signature="(Pley.API.Model.Store)" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="9" hits="1" branch="False" />
-                <line number="10" hits="1" branch="False" />
-                <line number="11" hits="1" branch="False" />
-                <line number="12" hits="1" branch="False" />
-                <line number="13" hits="1" branch="False" />
-                <line number="14" hits="1" branch="False" />
-                <line number="15" hits="1" branch="False" />
+                <line number="9" hits="2" branch="False" />
+                <line number="10" hits="2" branch="False" />
+                <line number="11" hits="2" branch="False" />
+                <line number="12" hits="2" branch="False" />
+                <line number="13" hits="2" branch="False" />
+                <line number="14" hits="2" branch="False" />
+                <line number="15" hits="2" branch="False" />
               </lines>
             </method>
             <method name="StoreInDTOToStore" signature="(Pley.API.DTO.StoreInDTO)" line-rate="0" branch-rate="1" complexity="1">
@@ -789,13 +789,13 @@
             </method>
           </methods>
           <lines>
-            <line number="9" hits="1" branch="False" />
-            <line number="10" hits="1" branch="False" />
-            <line number="11" hits="1" branch="False" />
-            <line number="12" hits="1" branch="False" />
-            <line number="13" hits="1" branch="False" />
-            <line number="14" hits="1" branch="False" />
-            <line number="15" hits="1" branch="False" />
+            <line number="9" hits="2" branch="False" />
+            <line number="10" hits="2" branch="False" />
+            <line number="11" hits="2" branch="False" />
+            <line number="12" hits="2" branch="False" />
+            <line number="13" hits="2" branch="False" />
+            <line number="14" hits="2" branch="False" />
+            <line number="15" hits="2" branch="False" />
             <line number="18" hits="0" branch="False" />
             <line number="19" hits="0" branch="False" />
             <line number="20" hits="0" branch="False" />
@@ -1368,7 +1368,7 @@
             <line number="16" hits="7" branch="False" />
           </lines>
         </class>
-        <class name="Pley.API.Service.StoreService" filename="3_Service\StoreService.cs" line-rate="0.34369999999999995" branch-rate="0.5" complexity="9">
+        <class name="Pley.API.Service.StoreService" filename="3_Service\StoreService.cs" line-rate="0.5937" branch-rate="1" complexity="9">
           <methods>
             <method name="Login" signature="(System.String,System.String)" line-rate="0" branch-rate="1" complexity="1">
               <lines>
@@ -1407,20 +1407,20 @@
                 <line number="52" hits="2" branch="False" />
               </lines>
             </method>
-            <method name="DeleteStoreById" signature="(System.Int32)" line-rate="0" branch-rate="0" complexity="2">
+            <method name="DeleteStoreById" signature="(System.Int32)" line-rate="1" branch-rate="1" complexity="2">
               <lines>
-                <line number="55" hits="0" branch="False" />
-                <line number="56" hits="0" branch="False" />
-                <line number="58" hits="0" branch="True" condition-coverage="0% (0/2)">
+                <line number="55" hits="2" branch="False" />
+                <line number="56" hits="2" branch="False" />
+                <line number="58" hits="2" branch="True" condition-coverage="100% (2/2)">
                   <conditions>
-                    <condition number="20" type="jump" coverage="0%" />
+                    <condition number="20" type="jump" coverage="100%" />
                   </conditions>
                 </line>
-                <line number="59" hits="0" branch="False" />
-                <line number="60" hits="0" branch="False" />
-                <line number="61" hits="0" branch="False" />
-                <line number="64" hits="0" branch="False" />
-                <line number="65" hits="0" branch="False" />
+                <line number="59" hits="1" branch="False" />
+                <line number="60" hits="1" branch="False" />
+                <line number="61" hits="1" branch="False" />
+                <line number="64" hits="1" branch="False" />
+                <line number="65" hits="2" branch="False" />
               </lines>
             </method>
             <method name="GetStoreByUsername" signature="(System.String)" line-rate="0" branch-rate="1" complexity="1">
@@ -1431,11 +1431,11 @@
             </method>
             <method name=".ctor" signature="(Pley.API.Repo.IStoreRepo,Pley.API.Util.Utility)" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="19" hits="2" branch="False" />
-                <line number="20" hits="2" branch="False" />
-                <line number="21" hits="2" branch="False" />
-                <line number="22" hits="2" branch="False" />
-                <line number="23" hits="2" branch="False" />
+                <line number="19" hits="4" branch="False" />
+                <line number="20" hits="4" branch="False" />
+                <line number="21" hits="4" branch="False" />
+                <line number="22" hits="4" branch="False" />
+                <line number="23" hits="4" branch="False" />
               </lines>
             </method>
           </methods>
@@ -1461,25 +1461,25 @@
             <line number="49" hits="1" branch="False" />
             <line number="51" hits="1" branch="False" />
             <line number="52" hits="2" branch="False" />
-            <line number="55" hits="0" branch="False" />
-            <line number="56" hits="0" branch="False" />
-            <line number="58" hits="0" branch="True" condition-coverage="0% (0/2)">
+            <line number="55" hits="2" branch="False" />
+            <line number="56" hits="2" branch="False" />
+            <line number="58" hits="2" branch="True" condition-coverage="100% (2/2)">
               <conditions>
-                <condition number="20" type="jump" coverage="0%" />
+                <condition number="20" type="jump" coverage="100%" />
               </conditions>
             </line>
-            <line number="59" hits="0" branch="False" />
-            <line number="60" hits="0" branch="False" />
-            <line number="61" hits="0" branch="False" />
-            <line number="64" hits="0" branch="False" />
-            <line number="65" hits="0" branch="False" />
+            <line number="59" hits="1" branch="False" />
+            <line number="60" hits="1" branch="False" />
+            <line number="61" hits="1" branch="False" />
+            <line number="64" hits="1" branch="False" />
+            <line number="65" hits="2" branch="False" />
             <line number="68" hits="0" branch="False" />
             <line number="69" hits="0" branch="False" />
-            <line number="19" hits="2" branch="False" />
-            <line number="20" hits="2" branch="False" />
-            <line number="21" hits="2" branch="False" />
-            <line number="22" hits="2" branch="False" />
-            <line number="23" hits="2" branch="False" />
+            <line number="19" hits="4" branch="False" />
+            <line number="20" hits="4" branch="False" />
+            <line number="21" hits="4" branch="False" />
+            <line number="22" hits="4" branch="False" />
+            <line number="23" hits="4" branch="False" />
           </lines>
         </class>
         <class name="Pley.API.Controller.CustomersController" filename="2_Controller\CustomerController.cs" line-rate="0" branch-rate="0" complexity="12">
@@ -2028,18 +2028,18 @@
           <methods>
             <method name="get_Id" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="14" hits="1" branch="False" />
+                <line number="14" hits="2" branch="False" />
               </lines>
             </method>
             <method name="get_Username" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="15" hits="2" branch="False" />
+                <line number="15" hits="4" branch="False" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="14" hits="1" branch="False" />
-            <line number="15" hits="2" branch="False" />
+            <line number="14" hits="2" branch="False" />
+            <line number="15" hits="4" branch="False" />
           </lines>
         </class>
         <class name="Pley.API.Model.Customer" filename="1_Model\Customer.cs" line-rate="0.8" branch-rate="1" complexity="5">
@@ -2136,17 +2136,17 @@
           <methods>
             <method name="get_Id" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="8" hits="2" branch="False" />
+                <line number="8" hits="4" branch="False" />
               </lines>
             </method>
             <method name="get_Username" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="9" hits="2" branch="False" />
+                <line number="9" hits="4" branch="False" />
               </lines>
             </method>
             <method name="get_Password" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="10" hits="1" branch="False" />
+                <line number="10" hits="2" branch="False" />
               </lines>
             </method>
             <method name="get_Name" signature="()" line-rate="0" branch-rate="1" complexity="1">
@@ -2166,18 +2166,18 @@
             </method>
             <method name=".ctor" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="14" hits="1" branch="False" />
+                <line number="14" hits="2" branch="False" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="8" hits="2" branch="False" />
-            <line number="9" hits="2" branch="False" />
-            <line number="10" hits="1" branch="False" />
+            <line number="8" hits="4" branch="False" />
+            <line number="9" hits="4" branch="False" />
+            <line number="10" hits="2" branch="False" />
             <line number="11" hits="0" branch="False" />
             <line number="12" hits="0" branch="False" />
             <line number="13" hits="0" branch="False" />
-            <line number="14" hits="1" branch="False" />
+            <line number="14" hits="2" branch="False" />
           </lines>
         </class>
       </classes>
