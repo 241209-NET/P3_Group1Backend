@@ -12,7 +12,7 @@ using Pley.API.Data;
 namespace Pley.API.Migrations
 {
     [DbContext(typeof(PleyContext))]
-    [Migration("20250126204834_first")]
+    [Migration("20250126213413_first")]
     partial class first
     {
         /// <inheritdoc />

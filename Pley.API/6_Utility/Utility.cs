@@ -42,7 +42,7 @@ public class Utility
         {
             sum += review.Rating;
         }
-        if (list.Count > 0) return sum / list.Count;
+        if (list.Count > 0) return Math.Round(sum / list.Count, 1);
 
         return 0;
     }
