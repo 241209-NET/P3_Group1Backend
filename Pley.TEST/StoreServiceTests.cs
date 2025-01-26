@@ -76,7 +76,11 @@ public class StoreServiceTests
         var storeRepoMock = new Mock<IStoreRepo>();
         var utility = new Utility();
 
-        var store = new Store { Id = 1, Username = "store1", Password = "password123" };
+        var store = new Store 
+        { 
+            Id = 1, Username = "store1", Password = "password123" 
+        };
+
         storeRepoMock.Setup(repo => repo.GetStoreById(It.IsAny<int>())).Returns(store);
         storeRepoMock.Setup(repo => repo.DeleteStoreById(It.IsAny<int>())).Verifiable();
 
@@ -89,5 +93,30 @@ public class StoreServiceTests
         Assert.NotNull(result);
         Assert.Equal("store1", result.Username);
         storeRepoMock.Verify(repo => repo.DeleteStoreById(It.IsAny<int>()), Times.Once);
+    }
+
+    [Fact]
+    public void CreateNewStore_ShouldReturnStoreOutDTO()
+    {
+        // Arrange
+        var storeRepoMock = new Mock<IStoreRepo>();
+        var utility = new Utility();
+        var newStoreDTO = new StoreInDTO 
+        { 
+            Username = "store1", Password = "password123" 
+        };
+
+        var store = new Store { Id = 1, Username = "store1", Password = "password123" };
+        storeRepoMock.Setup(repo => repo.CreateNewStore(It.IsAny<Store>())).Returns(store);
+
+        var storeService = new StoreService(storeRepoMock.Object, utility);
+
+        // Act
+        var result = storeService.CreateNewStore(newStoreDTO);
+
+        // Assert
+        Assert.NotNull(result);
+        Assert.Equal("store1", result.Username);
+        Assert.Equal(1, result.Id);
     }
 }
