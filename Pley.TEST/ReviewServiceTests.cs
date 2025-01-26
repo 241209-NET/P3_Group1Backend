@@ -63,7 +63,7 @@ public class ReviewServiceTests
     {
         // Arrange
         var mockRepo = new Mock<IReviewRepo>();
-        mockRepo.Setup(repo => repo.GetReviewById(999)).Returns((Review?)null);
+        mockRepo.Setup(repo => repo.GetReviewById(99)).Returns((Review?)null);
         
         var reviewService = new ReviewService(mockRepo.Object, null);
         
