@@ -1,6 +1,7 @@
 using Pley.API.DTO;
 using Pley.API.Repo;
 using Pley.API.Util;
+using Pley.API.Model;
 
 namespace Pley.API.Service;
 
@@ -13,48 +14,57 @@ public class ReviewService : IReviewService
         _reviewRepo = reviewRepo;
         _utility = utility;
     }
-    public ReviewOutDTO CreateNewReview(ReviewInDTO newReviewInDTO)
-    {
-        var review = _utility.ReviewInDTOToReview(newReviewInDTO);
-        review.LastUpdated = DateTime.UtcNow;
-        var newReview = _reviewRepo.CreateNewReview(review);        
-        return _utility.ReviewToReviewOutDTO(newReview);
-    }
 
-    public IEnumerable<ReviewOutDTO> GetAllReviews()
-    {
-        var reviews = _reviewRepo.GetAllReviews();
-
-        return reviews.Select(_utility.ReviewToReviewOutDTO);
-    }
-
-    public ReviewOutDTO? GetReviewById(int id)
+    public Review? GetReviewById(int id)
     {
         var review = _reviewRepo.GetReviewById(id);
 
         if(review is null)
-            return null;
-
-        return _utility.ReviewToReviewOutDTO(review);
-    }
-
-    public ReviewOutDTO? DeleteReviewById(int id)
-    {
-        var review = _reviewRepo.GetReviewById(id);
-
-        if (review is not null)
         {
-            _reviewRepo.DeleteReviewById(id);
-            return _utility.ReviewToReviewOutDTO(review);
+            return null;
         }
 
-        return null;
+        return review;
     }
 
-    // public IEnumerable<ReviewOutDTO> GetReviewsByCustomerId(int customerId)
-    // {
-    //     var reviews = _reviewRepo.GetReviewsByCustomerId(customerId);
+    public Review? DeleteReviewById(int id)
+    {
+        var deletedReview = _reviewRepo.DeleteReviewById(id);
+        if (deletedReview == null)
+        {
+            return null;
+        }
+        return deletedReview;
+    }
 
-    //     return reviews.Select(_utility.ReviewToReviewOutDTO);
+    public Review EditReviewById(Review existingReview, ReviewInDTO reviewIn)
+    {
+        if (reviewIn.Rating.HasValue)                       // if rating is changed
+        {
+            existingReview.Rating = reviewIn.Rating.Value;
+        }
+
+        if (!string.IsNullOrEmpty(reviewIn.Comment))    // if comment is changed
+        {
+            existingReview.Comment = reviewIn.Comment;
+        }
+
+        existingReview.LastUpdated = DateTime.Now;      // update the timestamp
+
+        return _reviewRepo.UpdateReview(existingReview);
+    }
+
+    public IEnumerable<Review> GetAllReviews()
+    {
+        var reviews = _reviewRepo.GetAllReviews();
+        return reviews;
+    }
+
+    // public ReviewOutDTO CreateNewReview(ReviewInDTO newReviewInDTO)
+    // {
+    //     var review = _utility.ReviewInDTOToReview(newReviewInDTO);
+    //     review.LastUpdated = DateTime.UtcNow;
+    //     var newReview = _reviewRepo.CreateNewReview(review);
+    //     return _utility.ReviewToReviewOutDTO(newReview);
     // }
 }

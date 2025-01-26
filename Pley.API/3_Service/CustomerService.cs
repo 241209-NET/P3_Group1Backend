@@ -10,42 +10,59 @@ namespace Pley.API.Service;
 public class CustomerService : ICustomerService
 {
     private readonly ICustomerRepo _customerRepo;
+    private readonly IReviewRepo _reviewRepo;
     private readonly Utility _utility;
-    public CustomerService(ICustomerRepo customerRepo, Utility utility)
+    public CustomerService(ICustomerRepo customerRepo, IReviewRepo reviewRepo, Utility utility)
     {
         _customerRepo = customerRepo;
+        _reviewRepo = reviewRepo;
         _utility = utility;
     }
 
-    public CustomerOutDTO CreateNewCustomer(CustomerInDTO newCustomerInDTO)
-    {
-        var customer = _utility.CustomerInDTOToCustomer(newCustomerInDTO);
-
-        var newCustomer = _customerRepo.CreateNewCustomer(customer);        
-        return _utility.CustomerToCustomerOutDTO(newCustomer);
-    }
-
-    public IEnumerable<CustomerOutDTO> GetAllCustomers()
+    public IEnumerable<Customer> GetAllCustomers()
     {
         var customers = _customerRepo.GetAllCustomers();
 
         if (customers == null)
-            throw null!;
-
-        List<CustomerOutDTO> list = new List<CustomerOutDTO>();
-        foreach(var customer in customers)
         {
-            var dto = _utility.CustomerToCustomerOutDTO(customer);
-            list.Add(dto);
+            return null!;
+        }
+        
+        foreach (var c in customers)
+        {
+            AvgRatingHelper(c);
         }
 
-        return list;
+        return customers;
     }
 
-    public CustomerOutDTO GetCustomerById(int id)
+    public Customer? GetCustomerById(int id)
     {
         var customer = _customerRepo.GetCustomerById(id);
-        var dto = _utility.CustomerToCustomerOutDTO(customer!);
-        return dto;
+        if (customer == null)
+        {
+            return null;
+        }
+
+        AvgRatingHelper(customer);
+        return customer;
+    }
+
+    public Customer? GetCustomerByName(string name)
+    {
+        var customer = _customerRepo.GetCustomerByName(name);
+        if (customer == null)
+        {
+            return null;
+        }
+        AvgRatingHelper(customer);
+        return customer;
+    }
+
+    public void AvgRatingHelper(Customer customer)
+    {
+        List<Review> list = _reviewRepo.GetAllReviews().Where(r => r.CustomerId == customer.Id).ToList();
+
+        customer.AvgRating = _utility.GetAvgRating(list);
     }
 }

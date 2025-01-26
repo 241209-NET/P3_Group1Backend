@@ -6,20 +6,10 @@ namespace Pley.API.Controller;
 
 [Route("api/[controller]")]
 [ApiController]
-public class ReviewController : ControllerBase
+public class ReviewsController : ControllerBase
 {
     private readonly IReviewService _reviewService;
-    public ReviewController(IReviewService reviewService) => _reviewService = reviewService;
-
-    [HttpGet]
-    public IActionResult GetAllReviews()
-    {
-        var reviewList = _reviewService.GetAllReviews();
-        if(reviewList is null || !reviewList.Any()) 
-            return NotFound("No reviews found"); 
-
-        return Ok(reviewList);
-    }
+    public ReviewsController(IReviewService reviewService) => _reviewService = reviewService;
 
     [HttpGet("{reviewId}")]
     public IActionResult GetReviewById(int reviewId)
@@ -27,64 +17,28 @@ public class ReviewController : ControllerBase
         try
         {
             var review = _reviewService.GetReviewById(reviewId);
-            if(review is null)
+            if (review is null)
             {
-                return NotFound("No reviews found for reviewId = " + reviewId);
+                return NotFound($"No review found for Id {reviewId}");
             }
+
             return Ok(review);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             return BadRequest(e.Message);
         }
     }
 
-    [HttpPost]
-    public IActionResult CreateNewReview([FromBody] ReviewInDTO newReviewInDTO)
+    [HttpGet]
+    public IActionResult GetAllReviews()
     {
-        var review = _reviewService.CreateNewReview(newReviewInDTO);
-        if(review is null){
-            return BadRequest("improper input.");
+        var reviewList = _reviewService.GetAllReviews();
+        if(reviewList is null || !reviewList.Any()) 
+        {
+            return NotFound("No reviews found"); 
         }
-        return Ok(review);
-    }
 
-    [HttpDelete("{id}")]
-    public IActionResult DeleteUserById(int id)
-    {
-        try
-        {
-            var user = _reviewService.DeleteReviewById(id);
-            if (user == null)
-            {
-                return NotFound($"No review found to delete for id = " + id);
-            }
-            return Ok(user);
-        }
-        catch(Exception e)
-        {
-            return BadRequest(e.Message);
-        }
+        return Ok(reviewList);
     }
-
-        [HttpDelete("{id}"!)]
-    public IActionResult DeleteReviewById(int id)
-    {
-        try
-        {
-            var user = _reviewService.DeleteReviewById(id);
-            if (user == null)
-            {
-                return NotFound($"No review found to delete for id = " + id);
-            }
-            return Ok(user);
-        }
-        catch(Exception e)
-        {
-            return BadRequest(e.Message);
-        }
-    }
-
-    // TODO:
-    // put review
 }

@@ -1,6 +1,5 @@
 using Pley.API.DTO;
 using Pley.API.Model;
-using Pley.API.Service;
 
 namespace Pley.API.Util;
 
@@ -36,35 +35,28 @@ public class Utility
         };
     }
 
-    public Review ReviewInDTOToReview(ReviewInDTO reviewInDTO)
+    public Review ReviewInDTOToReview(ReviewInDTO reviewInDTO, int customerId, int storeId)
     {
         return new Review
         {
-            Comment = reviewInDTO.Comment,
-            CustomerId = reviewInDTO.CustomerId,
-            StoreId = reviewInDTO.StoreId,
-            Rating = reviewInDTO.Rating
+            Rating = reviewInDTO.Rating ?? 0,           // default 0 if null
+            Comment = reviewInDTO.Comment ?? "",        // default "" if null (need to be nullable for patch)
+            CustomerId = customerId,
+            StoreId = storeId,
+            LastUpdated = DateTime.Now
         };
     }
 
-    public CustomerOutDTO CustomerToCustomerOutDTO(Customer customer)
+    public double GetAvgRating(List<Review> list)
     {
-        return new CustomerOutDTO()
+        double sum = 0;
+        foreach(var review in list)
         {
-            Id = customer.Id,
-            Name = customer.Name,
-            AvgRating = customer.AvgRating,
-        };
-    }
+            sum += review.Rating;
+        }
+        if (list.Count > 0) return sum / list.Count;
 
-    public Customer CustomerInDTOToCustomer(CustomerInDTO customer)
-    {
-        return new Customer()
-        {
-            Id = customer.Id,
-            Name = customer.Name!,
-            AvgRating = 0
-        };
+        return 0;
     }
 
     public double GetAvgRating(List<Review> list)

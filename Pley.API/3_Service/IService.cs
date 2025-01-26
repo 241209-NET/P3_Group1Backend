@@ -15,15 +15,16 @@ public interface IStoreService
 
 public interface IReviewService
 {
-    ReviewOutDTO? GetReviewById(int id);
-    IEnumerable<ReviewOutDTO> GetAllReviews();
-    ReviewOutDTO CreateNewReview(ReviewInDTO newReview);
-    ReviewOutDTO? DeleteReviewById(int id);
+    Review? GetReviewById(int id);
+    Review? DeleteReviewById(int id);
+    Review EditReviewById(Review existingReview, ReviewInDTO reviewIn);     // guaranteedd not null ever because of controller
+    IEnumerable<Review> GetAllReviews();
+    // Review CreateNewReview(ReviewInDTO newReview);
 }
 
 public interface ICustomerService
 {
-    CustomerOutDTO? GetCustomerById(int id);
-    IEnumerable<CustomerOutDTO> GetAllCustomers();
-    CustomerOutDTO CreateNewCustomer(CustomerInDTO customer);
+    IEnumerable<Customer> GetAllCustomers();
+    Customer? GetCustomerById(int id);
+    Customer? GetCustomerByName(string name);
 }

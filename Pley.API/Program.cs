@@ -19,10 +19,12 @@ builder.Services.AddDbContext<PleyContext>(options =>
 //Add service dependencies
 builder.Services.AddScoped<IStoreService, StoreService>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
+builder.Services.AddScoped<ICustomerService, CustomerService>();
 
 //Add repo dependencies
 builder.Services.AddScoped<IStoreRepo, StoreRepo>();
 builder.Services.AddScoped<IReviewRepo, ReviewRepo>();
+builder.Services.AddScoped<ICustomerRepo, CustomerRepo>();
 
 //Use singleton for utilies
 builder.Services.AddSingleton<Utility>(); 

@@ -6,11 +6,11 @@ namespace Pley.API.Controller;
 
 [Route("api/[controller]")]
 [ApiController]
-public class StoreController : ControllerBase
+public class StoresController : ControllerBase
 {
     private readonly IStoreService _storeService;
 
-    public StoreController(IStoreService storeService)
+    public StoresController(IStoreService storeService)
     {
         _storeService = storeService;
     }
