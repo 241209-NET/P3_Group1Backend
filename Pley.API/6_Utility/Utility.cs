@@ -23,18 +23,6 @@ public class Utility
         };
     }
 
-    public ReviewOutDTO ReviewToReviewOutDTO(Review review)
-    {
-        return new ReviewOutDTO
-        {
-            Comment = review.Comment,
-            CustomerId = review.CustomerId, 
-            StoreId = review.StoreId,
-            LastUpdated = review.LastUpdated,
-            Rating = review.Rating
-        };
-    }
-
     public Review ReviewInDTOToReview(ReviewInDTO reviewInDTO, int customerId, int storeId)
     {
         return new Review

@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Pley.API.Model;
 
-   [Index(nameof(Username), IsUnique = true)]
+[Index(nameof(Username), IsUnique = true)]
 public class Store
 {
    public int Id { get; set; }
