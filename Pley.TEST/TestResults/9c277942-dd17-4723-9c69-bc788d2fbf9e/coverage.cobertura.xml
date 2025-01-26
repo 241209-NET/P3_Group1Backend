@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<coverage line-rate="0.09179999999999999" branch-rate="0.1718" version="1.9" timestamp="1737875776" lines-covered="65" lines-valid="708" branches-covered="11" branches-valid="64">
+<coverage line-rate="0.12279999999999999" branch-rate="0.2656" version="1.9" timestamp="1737883532" lines-covered="87" lines-valid="708" branches-covered="17" branches-valid="64">
   <sources>
     <source>D:\Rev programming\P3_Group1Backend\Pley.API\</source>
   </sources>
   <packages>
-    <package name="Pley.API" line-rate="0.09179999999999999" branch-rate="0.1718" complexity="135">
+    <package name="Pley.API" line-rate="0.12279999999999999" branch-rate="0.2656" complexity="135">
       <classes>
         <class name="Program" filename="Program.cs" line-rate="0" branch-rate="0" complexity="2">
           <methods>
@@ -710,7 +710,7 @@
             <line number="132" hits="0" branch="False" />
           </lines>
         </class>
-        <class name="Pley.API.Util.Utility" filename="6_Utility\Utility.cs" line-rate="0" branch-rate="0" complexity="9">
+        <class name="Pley.API.Util.Utility" filename="6_Utility\Utility.cs" line-rate="0.18600000000000003" branch-rate="0.5" complexity="9">
           <methods>
             <method name="StoreToStoreOutDTO" signature="(Pley.API.Model.Store)" line-rate="0" branch-rate="1" complexity="1">
               <lines>
@@ -766,25 +766,25 @@
                 <line number="48" hits="0" branch="False" />
               </lines>
             </method>
-            <method name="GetAvgRating" signature="(System.Collections.Generic.List`1&lt;Pley.API.Model.Review&gt;)" line-rate="0" branch-rate="0" complexity="4">
+            <method name="GetAvgRating" signature="(System.Collections.Generic.List`1&lt;Pley.API.Model.Review&gt;)" line-rate="0.8887999999999999" branch-rate="0.75" complexity="4">
               <lines>
-                <line number="51" hits="0" branch="False" />
-                <line number="52" hits="0" branch="False" />
-                <line number="53" hits="0" branch="True" condition-coverage="0% (0/2)">
+                <line number="51" hits="3" branch="False" />
+                <line number="52" hits="3" branch="False" />
+                <line number="53" hits="19" branch="True" condition-coverage="100% (2/2)">
                   <conditions>
-                    <condition number="48" type="jump" coverage="0%" />
+                    <condition number="48" type="jump" coverage="100%" />
                   </conditions>
                 </line>
-                <line number="54" hits="0" branch="False" />
-                <line number="55" hits="0" branch="False" />
-                <line number="56" hits="0" branch="False" />
-                <line number="57" hits="0" branch="True" condition-coverage="0% (0/2)">
+                <line number="54" hits="5" branch="False" />
+                <line number="55" hits="5" branch="False" />
+                <line number="56" hits="5" branch="False" />
+                <line number="57" hits="6" branch="True" condition-coverage="50% (1/2)">
                   <conditions>
-                    <condition number="78" type="jump" coverage="0%" />
+                    <condition number="78" type="jump" coverage="50%" />
                   </conditions>
                 </line>
                 <line number="59" hits="0" branch="False" />
-                <line number="60" hits="0" branch="False" />
+                <line number="60" hits="3" branch="False" />
               </lines>
             </method>
           </methods>
@@ -827,23 +827,23 @@
             <line number="46" hits="0" branch="False" />
             <line number="47" hits="0" branch="False" />
             <line number="48" hits="0" branch="False" />
-            <line number="51" hits="0" branch="False" />
-            <line number="52" hits="0" branch="False" />
-            <line number="53" hits="0" branch="True" condition-coverage="0% (0/2)">
+            <line number="51" hits="3" branch="False" />
+            <line number="52" hits="3" branch="False" />
+            <line number="53" hits="19" branch="True" condition-coverage="100% (2/2)">
               <conditions>
-                <condition number="48" type="jump" coverage="0%" />
+                <condition number="48" type="jump" coverage="100%" />
               </conditions>
             </line>
-            <line number="54" hits="0" branch="False" />
-            <line number="55" hits="0" branch="False" />
-            <line number="56" hits="0" branch="False" />
-            <line number="57" hits="0" branch="True" condition-coverage="0% (0/2)">
+            <line number="54" hits="5" branch="False" />
+            <line number="55" hits="5" branch="False" />
+            <line number="56" hits="5" branch="False" />
+            <line number="57" hits="6" branch="True" condition-coverage="50% (1/2)">
               <conditions>
-                <condition number="78" type="jump" coverage="0%" />
+                <condition number="78" type="jump" coverage="50%" />
               </conditions>
             </line>
             <line number="59" hits="0" branch="False" />
-            <line number="60" hits="0" branch="False" />
+            <line number="60" hits="3" branch="False" />
           </lines>
         </class>
         <class name="Pley.API.Data.PleyContext" filename="5_Data\PleyContext.cs" line-rate="0" branch-rate="1" complexity="5">
@@ -1108,29 +1108,29 @@
             <line number="12" hits="0" branch="False" />
           </lines>
         </class>
-        <class name="Pley.API.Service.CustomerService" filename="3_Service\CustomerService.cs" line-rate="0.6486" branch-rate="0.375" complexity="10">
+        <class name="Pley.API.Service.CustomerService" filename="3_Service\CustomerService.cs" line-rate="0.8918" branch-rate="0.75" complexity="10">
           <methods>
-            <method name="GetAllCustomers" signature="()" line-rate="0.5454" branch-rate="0.25" complexity="4">
+            <method name="GetAllCustomers" signature="()" line-rate="1" branch-rate="1" complexity="4">
               <lines>
-                <line number="23" hits="1" branch="False" />
-                <line number="24" hits="1" branch="False" />
-                <line number="26" hits="1" branch="True" condition-coverage="50% (1/2)">
+                <line number="23" hits="2" branch="False" />
+                <line number="24" hits="2" branch="False" />
+                <line number="26" hits="2" branch="True" condition-coverage="100% (2/2)">
                   <conditions>
-                    <condition number="19" type="jump" coverage="50%" />
+                    <condition number="19" type="jump" coverage="100%" />
                   </conditions>
                 </line>
                 <line number="27" hits="1" branch="False" />
                 <line number="28" hits="1" branch="False" />
-                <line number="31" hits="0" branch="True" condition-coverage="0% (0/2)">
+                <line number="31" hits="7" branch="True" condition-coverage="100% (2/2)">
                   <conditions>
-                    <condition number="61" type="jump" coverage="0%" />
+                    <condition number="61" type="jump" coverage="100%" />
                   </conditions>
                 </line>
-                <line number="32" hits="0" branch="False" />
-                <line number="33" hits="0" branch="False" />
-                <line number="34" hits="0" branch="False" />
-                <line number="36" hits="0" branch="False" />
-                <line number="37" hits="1" branch="False" />
+                <line number="32" hits="2" branch="False" />
+                <line number="33" hits="2" branch="False" />
+                <line number="34" hits="2" branch="False" />
+                <line number="36" hits="1" branch="False" />
+                <line number="37" hits="2" branch="False" />
               </lines>
             </method>
             <method name="GetCustomerById" signature="(System.Int32)" line-rate="0.75" branch-rate="0.5" complexity="2">
@@ -1165,45 +1165,45 @@
                 <line number="60" hits="1" branch="False" />
               </lines>
             </method>
-            <method name="AvgRatingHelper" signature="(Pley.API.Model.Customer)" line-rate="0" branch-rate="1" complexity="1">
+            <method name="AvgRatingHelper" signature="(Pley.API.Model.Customer)" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="63" hits="0" branch="False" />
-                <line number="64" hits="0" branch="False" />
-                <line number="66" hits="0" branch="False" />
-                <line number="67" hits="0" branch="False" />
+                <line number="63" hits="3" branch="False" />
+                <line number="64" hits="11" branch="False" />
+                <line number="66" hits="3" branch="False" />
+                <line number="67" hits="3" branch="False" />
               </lines>
             </method>
             <method name=".ctor" signature="(Pley.API.Repo.ICustomerRepo,Pley.API.Repo.IReviewRepo,Pley.API.Util.Utility)" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="15" hits="3" branch="False" />
-                <line number="16" hits="3" branch="False" />
-                <line number="17" hits="3" branch="False" />
-                <line number="18" hits="3" branch="False" />
-                <line number="19" hits="3" branch="False" />
-                <line number="20" hits="3" branch="False" />
+                <line number="15" hits="5" branch="False" />
+                <line number="16" hits="5" branch="False" />
+                <line number="17" hits="5" branch="False" />
+                <line number="18" hits="5" branch="False" />
+                <line number="19" hits="5" branch="False" />
+                <line number="20" hits="5" branch="False" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="23" hits="1" branch="False" />
-            <line number="24" hits="1" branch="False" />
-            <line number="26" hits="1" branch="True" condition-coverage="50% (1/2)">
+            <line number="23" hits="2" branch="False" />
+            <line number="24" hits="2" branch="False" />
+            <line number="26" hits="2" branch="True" condition-coverage="100% (2/2)">
               <conditions>
-                <condition number="19" type="jump" coverage="50%" />
+                <condition number="19" type="jump" coverage="100%" />
               </conditions>
             </line>
             <line number="27" hits="1" branch="False" />
             <line number="28" hits="1" branch="False" />
-            <line number="31" hits="0" branch="True" condition-coverage="0% (0/2)">
+            <line number="31" hits="7" branch="True" condition-coverage="100% (2/2)">
               <conditions>
-                <condition number="61" type="jump" coverage="0%" />
+                <condition number="61" type="jump" coverage="100%" />
               </conditions>
             </line>
-            <line number="32" hits="0" branch="False" />
-            <line number="33" hits="0" branch="False" />
-            <line number="34" hits="0" branch="False" />
-            <line number="36" hits="0" branch="False" />
-            <line number="37" hits="1" branch="False" />
+            <line number="32" hits="2" branch="False" />
+            <line number="33" hits="2" branch="False" />
+            <line number="34" hits="2" branch="False" />
+            <line number="36" hits="1" branch="False" />
+            <line number="37" hits="2" branch="False" />
             <line number="40" hits="1" branch="False" />
             <line number="41" hits="1" branch="False" />
             <line number="42" hits="1" branch="True" condition-coverage="50% (1/2)">
@@ -1228,16 +1228,16 @@
             <line number="58" hits="0" branch="False" />
             <line number="59" hits="0" branch="False" />
             <line number="60" hits="1" branch="False" />
-            <line number="63" hits="0" branch="False" />
-            <line number="64" hits="0" branch="False" />
-            <line number="66" hits="0" branch="False" />
-            <line number="67" hits="0" branch="False" />
-            <line number="15" hits="3" branch="False" />
-            <line number="16" hits="3" branch="False" />
-            <line number="17" hits="3" branch="False" />
-            <line number="18" hits="3" branch="False" />
-            <line number="19" hits="3" branch="False" />
-            <line number="20" hits="3" branch="False" />
+            <line number="63" hits="3" branch="False" />
+            <line number="64" hits="11" branch="False" />
+            <line number="66" hits="3" branch="False" />
+            <line number="67" hits="3" branch="False" />
+            <line number="15" hits="5" branch="False" />
+            <line number="16" hits="5" branch="False" />
+            <line number="17" hits="5" branch="False" />
+            <line number="18" hits="5" branch="False" />
+            <line number="19" hits="5" branch="False" />
+            <line number="20" hits="5" branch="False" />
           </lines>
         </class>
         <class name="Pley.API.Service.ReviewService" filename="3_Service\ReviewService.cs" line-rate="1" branch-rate="1" complexity="10">
@@ -2042,21 +2042,21 @@
             <line number="15" hits="0" branch="False" />
           </lines>
         </class>
-        <class name="Pley.API.Model.Customer" filename="1_Model\Customer.cs" line-rate="0" branch-rate="1" complexity="5">
+        <class name="Pley.API.Model.Customer" filename="1_Model\Customer.cs" line-rate="0.8" branch-rate="1" complexity="5">
           <methods>
-            <method name="get_Id" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="get_Id" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="5" hits="0" branch="False" />
+                <line number="5" hits="14" branch="False" />
               </lines>
             </method>
-            <method name="get_Name" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="get_Name" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="6" hits="0" branch="False" />
+                <line number="6" hits="3" branch="False" />
               </lines>
             </method>
-            <method name="get_AvgRating" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="get_AvgRating" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="7" hits="0" branch="False" />
+                <line number="7" hits="6" branch="False" />
               </lines>
             </method>
             <method name="get_URL" signature="()" line-rate="0" branch-rate="1" complexity="1">
@@ -2064,21 +2064,21 @@
                 <line number="8" hits="0" branch="False" />
               </lines>
             </method>
-            <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name=".ctor" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="9" hits="0" branch="False" />
+                <line number="9" hits="3" branch="False" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="5" hits="0" branch="False" />
-            <line number="6" hits="0" branch="False" />
-            <line number="7" hits="0" branch="False" />
+            <line number="5" hits="14" branch="False" />
+            <line number="6" hits="3" branch="False" />
+            <line number="7" hits="6" branch="False" />
             <line number="8" hits="0" branch="False" />
-            <line number="9" hits="0" branch="False" />
+            <line number="9" hits="3" branch="False" />
           </lines>
         </class>
-        <class name="Pley.API.Model.Review" filename="1_Model\Review.cs" line-rate="0.5" branch-rate="1" complexity="8">
+        <class name="Pley.API.Model.Review" filename="1_Model\Review.cs" line-rate="0.625" branch-rate="1" complexity="8">
           <methods>
             <method name="get_Id" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
@@ -2090,19 +2090,19 @@
                 <line number="8" hits="0" branch="False" />
               </lines>
             </method>
-            <method name="get_CustomerId" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="get_CustomerId" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="9" hits="0" branch="False" />
+                <line number="9" hits="13" branch="False" />
               </lines>
             </method>
             <method name="get_Comment" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="10" hits="14" branch="False" />
+                <line number="10" hits="19" branch="False" />
               </lines>
             </method>
             <method name="get_Rating" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="11" hits="9" branch="False" />
+                <line number="11" hits="19" branch="False" />
               </lines>
             </method>
             <method name="get_LastUpdated" signature="()" line-rate="1" branch-rate="1" complexity="1">
@@ -2124,9 +2124,9 @@
           <lines>
             <line number="7" hits="8" branch="False" />
             <line number="8" hits="0" branch="False" />
-            <line number="9" hits="0" branch="False" />
-            <line number="10" hits="14" branch="False" />
-            <line number="11" hits="9" branch="False" />
+            <line number="9" hits="13" branch="False" />
+            <line number="10" hits="19" branch="False" />
+            <line number="11" hits="19" branch="False" />
             <line number="12" hits="2" branch="False" />
             <line number="13" hits="0" branch="False" />
             <line number="14" hits="0" branch="False" />
