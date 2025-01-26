@@ -23,8 +23,4 @@ public class CustomerRepo : ICustomerRepo
     {
         return _pleyContext.Customers.Where(c => c.Name == name).First();
     }
-
-
-
-
 }

@@ -11,37 +11,56 @@ public class ReviewRepo : IReviewRepo
 
     public ReviewRepo(PleyContext pleyContext) => _pleyContext = pleyContext;
 
-    public Review CreateNewReview(Review newReview)
-    {
-        _pleyContext.Reviews.Add(newReview);
-        _pleyContext.SaveChanges();
-        return newReview;
-    }
-
-    public IEnumerable<Review> GetAllReviews()
-    {
-        return _pleyContext.Reviews;
-    }
-
     public Review? GetReviewById(int reviewId)
     {
-        return _pleyContext.Reviews.Find(reviewId);
+        var review = _pleyContext.Reviews.Find(reviewId);
+        if (review == null)
+        {
+            return null;
+        }
+
+        return review;
     }
 
     public Review? DeleteReviewById(int id)
     {
-        Review? review = GetReviewById(id);
-        if(review is null) 
-            return null; //throw new ReviewNotFoundException();
-
-        // review is not null, proceed
+        var review = _pleyContext.Reviews.Find(id);
+        if (review == null)
+        { 
+            return null;
+        }
         _pleyContext.Reviews.Remove(review);
         _pleyContext.SaveChanges();
+
         return review;
     }
 
-    public IEnumerable<Review> GetReviewsByStoreId(int storeId)
+    public Review UpdateReview(Review existingReview)
     {
-        return _pleyContext.Reviews.Where(r => r.StoreId == storeId); //.Include(u => u.Store).ToList();
+        _pleyContext.Reviews.Update(existingReview);
+        _pleyContext.SaveChanges();
+
+        return existingReview;
     }
+
+    public IEnumerable<Review> GetAllReviews()
+    {
+        return _pleyContext.Reviews.ToList();
+    }
+
+
+
+
+
+    // public IEnumerable<Review> GetReviewsByStoreId(int storeId)
+    // {
+    //     return _pleyContext.Reviews.Where(r => r.StoreId == storeId); //.Include(u => u.Store).ToList();
+    // }
+
+    // public Review CreateNewReview(Review newReview)
+    // {
+    //     _pleyContext.Reviews.Add(newReview);
+    //     _pleyContext.SaveChanges();
+    //     return newReview;
+    // }
 }

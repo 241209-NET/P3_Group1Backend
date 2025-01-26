@@ -12,7 +12,7 @@ namespace Pley.API.DTO;
 public class ReviewInDTO
 {
     public int Rating { get; set; }
-    public required string Comment { get; set; }
+    public string Comment { get; set; }
 }
 
 public class ReviewOutDTO
