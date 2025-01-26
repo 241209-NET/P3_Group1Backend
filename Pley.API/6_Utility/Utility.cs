@@ -50,18 +50,6 @@ public class Utility
     public double GetAvgRating(List<Review> list)
     {
         double sum = 0;
-        foreach(var review in list)
-        {
-            sum += review.Rating;
-        }
-        if (list.Count > 0) return sum / list.Count;
-
-        return 0;
-    }
-
-    public double GetAvgRating(List<Review> list)
-    {
-        double sum = 0;
         foreach (var review in list)
         {
             sum += review.Rating;
