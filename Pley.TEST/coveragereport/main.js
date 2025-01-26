@@ -222,7 +222,7 @@ var assemblies = [
     "name": "Pley.API",
     "classes": [
       { "name": "Pley.API.Service.CustomerService", "rp": "Pley.API_CustomerService.html", "cl": 0, "ucl": 37, "cal": 37, "tl": 68, "cb": 0, "tb": 8, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Pley.API.Service.ReviewService", "rp": "Pley.API_ReviewService.html", "cl": 23, "ucl": 12, "cal": 35, "tl": 70, "cb": 4, "tb": 8, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Pley.API.Service.ReviewService", "rp": "Pley.API_ReviewService.html", "cl": 35, "ucl": 0, "cal": 35, "tl": 70, "cb": 8, "tb": 8, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Pley.API.Service.StoreService", "rp": "Pley.API_StoreService.html", "cl": 0, "ucl": 32, "cal": 32, "tl": 72, "cb": 0, "tb": 4, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
     ]},
 ];

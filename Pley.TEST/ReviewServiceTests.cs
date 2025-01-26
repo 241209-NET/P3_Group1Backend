@@ -1,4 +1,5 @@
 using Moq;
+using Pley.API.DTO;
 using Pley.API.Model;
 using Pley.API.Repo;
 using Pley.API.Service;
@@ -111,5 +112,58 @@ public class ReviewServiceTests
         
         // Assert
         Assert.Null(result);
+    }
+
+    [Fact]
+    public void EditReviewById_UpdatesRating_Test()
+    {
+        // Arrange
+        var existingReview = new Review 
+        { 
+            Id = 1, Comment = "Great", Rating = 3 
+        };
+
+        var reviewInDTO = new ReviewInDTO 
+        { 
+            Rating = 5 
+        };  
+        
+        var mockRepo = new Mock<IReviewRepo>();
+        mockRepo.Setup(repo => repo.UpdateReview(It.IsAny<Review>())).Returns((Review r) => r);
+        
+        var reviewService = new ReviewService(mockRepo.Object, null);
+        
+        // Act
+        var result = reviewService.EditReviewById(existingReview, reviewInDTO);
+        
+        // Assert
+        Assert.Equal(5, result.Rating);  
+        Assert.Equal("Great", result.Comment); 
+    }
+
+    [Fact]
+    public void EditReviewById_UpdatesComment_Test()
+    {
+        // Arrange
+        var existingReview = new Review 
+        { 
+            Id = 1, Comment = "Old Comment", Rating = 3 
+        };
+        var reviewInDTO = new ReviewInDTO 
+        { 
+            Comment = "Updated Comment" 
+        };  
+        
+        var mockRepo = new Mock<IReviewRepo>();
+        mockRepo.Setup(repo => repo.UpdateReview(It.IsAny<Review>())).Returns((Review r) => r);
+        
+        var reviewService = new ReviewService(mockRepo.Object, null);
+        
+        // Act
+        var result = reviewService.EditReviewById(existingReview, reviewInDTO);
+        
+        // Assert
+        Assert.Equal("Updated Comment", result.Comment);  
+        Assert.Equal(3, result.Rating);  
     }
 }
