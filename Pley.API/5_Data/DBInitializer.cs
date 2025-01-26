@@ -17,13 +17,13 @@ public static class DbInitializer
       var customers = new Customer[]
       {
         new Customer    // 1
-        { 
-          Name = "Homer Simpson", 
+        {
+          Name = "Homer Simpson",
           AvgRating = 0,
           URL = "https://64.media.tumblr.com/f465722bc14debe6fdc2c388f4467eb6/tumblr_pucdelTwTQ1uzae1ko1_500.gif"
         },
         new Customer    // 2
-        { 
+        {
           Name = "Stan Smith",
           AvgRating = 0,
           URL = "https://ih1.redbubble.net/image.1088488847.1552/st,small,507x507-pad,600x600,f8f8f8.jpg"
@@ -117,10 +117,10 @@ public static class DbInitializer
       var stores = new Store[]
       {
         new Store     // 1
-        { 
+        {
           Username = "gamestop1",
           Password = "password",
-          Name = "GameStop", 
+          Name = "GameStop",
           Description = "Shop GameStop, the world's largest retail gaming and trade-in destination for Xbox, PlayStation, and Nintendo games, systems, consoles & accessories.",
           URL = "https://money.com/wp-content/uploads/2022/01/Investing-GameStop-Frenzy-Spencer-Jakab.jpg?quality=60&w=640"
         },
@@ -147,7 +147,7 @@ public static class DbInitializer
           Name = "Starbucks",
           Description = "Starbucks Corporation is an American multinational chain of coffeehouses and roastery reserves headquartered in Seattle, Washington.",
           URL = "https://www.usatoday.com/gcdn/authoring/authoring-images/2023/08/23/USAT/70655313007-starbucks-fall-beverages.png?crop=957,719,x241,y0"
-        },        
+        },
         new Store     // 5
         {
           Username = "parisbaguette1",
@@ -178,54 +178,173 @@ public static class DbInitializer
         {
           StoreId = 5,            // Paris Baguette
           CustomerId = 1,         // Homer
-          Comment = "Banned! He did not pay for the croissants!",  
-          Rating = 1, 
+          Comment = "Banned! He did not pay for the croissants!",
+          Rating = 1,
           LastUpdated = GenerateRandomDate()
         },
-        new Review      // 6
+        new Review      // 2
         {
           StoreId = 6,            // Prada
           CustomerId = 1,         // Homer
           Comment = "He has a refreshing personality.",
           Rating = 5,
           LastUpdated = GenerateRandomDate()
+        },
+        new Review      // 3
+        {
+          StoreId = 1,            // GameStop 
+          CustomerId = 1,         // Homer
+          Comment = "Mid gamer, would not recommend.",
+          Rating = 3,
+          LastUpdated = GenerateRandomDate()
+        },
+        new Review      // 4
+        {
+          StoreId = 2,            // Waffle House
+          CustomerId = 1,         // Homer
+          Comment = "Banned!  He did not pay for his food! 😠",
+          Rating = 1,
+          LastUpdated = GenerateRandomDate()
+        },
+        new Review      // 5
+        {
+          StoreId = 3,            // Costco 
+          CustomerId = 1,         // Homer
+          Comment = "He ate hotdog in one bite.  Impressed.",
+          Rating = 5,
+          LastUpdated = GenerateRandomDate()
+        },
+        new Review      // 6
+        {
+          StoreId = 4,            // Starbucks 
+          CustomerId = 1,         // Homer
+          Comment = "He ruined our bathroom.  Banned!",
+          Rating = 1,
+          LastUpdated = GenerateRandomDate()
+        },
+        new Review      // 7
+        {
+          StoreId = 1,            // GameStop
+          CustomerId = 14,        // Grunch
+          Comment = "After buying game, he gave us a dance show.",
+          Rating = 5,
+          LastUpdated = GenerateRandomDate()
+        },
+        new Review      // 8
+        {
+          StoreId = 6,            // Prada 
+          CustomerId = 11,        // Pauly D
+          Comment = "He returns all the merchandise after taking pictures with them.  Terrible!",
+          Rating = 1,
+          LastUpdated = GenerateRandomDate()
+        },
+        new Review      // 9
+        {
+          StoreId = 5,            // Paris Baguette
+          CustomerId = 6,         // Tom Selleck
+          Comment = "He is a dreamy customer!!",
+          Rating = 5,
+          LastUpdated = GenerateRandomDate()
+        },
+        new Review      // 10
+        {
+          StoreId = 2,            // Waffle House
+          CustomerId = 6,         // Tom Selleck
+          Comment = "He tips 15%.",
+          Rating = 4,
+          LastUpdated = GenerateRandomDate()
+        },
+        new Review      // 11
+        {
+          StoreId = 2,            // Waffle House
+          CustomerId = 8,         // Eric Cartman
+          Comment = "He was rude to our staff.",
+          Rating = 2,
+          LastUpdated = GenerateRandomDate()
+        },
+        new Review      // 12
+        {
+          StoreId = 3,            // Costco
+          CustomerId = 5,         // Chuck Norris
+          Comment = "He's our favorite customer.",
+          Rating = 5,
+          LastUpdated = GenerateRandomDate()
+        },
+        new Review      // 13
+        {
+          StoreId = 5,            // Paris Baguette
+          CustomerId = 5,         // Chuck Norris 
+          Comment = "He kept demonstrating how to do a round house kick in our cafe?",
+          Rating = 3,
+          LastUpdated = GenerateRandomDate()
+        },
+        new Review      // 14
+        {
+          StoreId = 4,            // Starbucks
+          CustomerId = 9,         // Arthur Read
+          Comment = "A well-behaved young man.",
+          Rating = 5,
+          LastUpdated = GenerateRandomDate()
+        },
+        new Review      // 15
+        {
+          StoreId = 6,            // Prada
+          CustomerId = 15,        // Justin Timberlake 
+          Comment = "He is a silly billy.",
+          Rating = 4,
+          LastUpdated = GenerateRandomDate()
+        },
+        new Review      // 16
+        {
+          StoreId = 4,            // Starbucks
+          CustomerId = 15,        // Justin Timberlake 
+          Comment = "He is alright, I guess.",
+          Rating = 3,
+          LastUpdated = GenerateRandomDate()
+        },
+        new Review      // 17
+        {
+          StoreId = 3,            // Costco 
+          CustomerId = 7,         // Pam Poovey
+          Comment = "She practically bought the whole store!  We love her.",
+          Rating = 5,
+          LastUpdated = GenerateRandomDate()
+        },
+        new Review      // 18
+        {
+          StoreId = 2,            // Waffle House
+          CustomerId = 7,         // Pam Poovey
+          Comment = "She's one of our regulars.",
+          Rating = 4,
+          LastUpdated = GenerateRandomDate()
+        },
+        new Review      // 19
+        {
+          StoreId = 3,             // Costco
+          CustomerId = 12,         // Chevy Chase
+          Comment = "He's a family man.",
+          Rating = 4,
+          LastUpdated = GenerateRandomDate()
+        },
+        new Review      // 20
+        {
+          StoreId = 2,             // Waffle House
+          CustomerId = 3,          // Roger Smith
+          Comment = "Messier than normal customers.",
+          Rating = 2,
+          LastUpdated = GenerateRandomDate()
         }
       };
       context.Reviews.AddRange(reviews);
       context.SaveChanges();
 
-      // foreach (var customer in context.Customers)
-      // {
-      //   UpdateCustomerAvgRating(context, customer);
-      // }
-      // context.SaveChanges();
       UpdateCustomerAvgRating(context);
     }
   }
 
-  // private static void UpdateCustomerAvgRating(PleyContext context)
-  // {
-  //   // Get all customers
-  //   var customers = context.Customers.ToList();
-
-  //   foreach (var customer in customers)
-  //   {
-  //     // Get all reviews for this customer
-  //     var reviews = context.Reviews.Where(r => r.CustomerId == customer.Id).ToList();
-
-  //     // Calculate the average rating (or set it to 0 if no reviews)
-  //     customer.AvgRating = reviews.Any() ? reviews.Average(r => r.Rating) : 0;
-
-  //     // Update customer entity
-  //     context.Customers.Update(customer);
-  //   }
-
-  //   context.SaveChanges();
-  // }
-
   private static void UpdateCustomerAvgRating(PleyContext context)
   {
-    var utility = new Utility();  
+    var utility = new Utility();
     var customers = context.Customers.ToList();
 
     foreach (var customer in customers)
