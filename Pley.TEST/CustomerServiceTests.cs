@@ -6,7 +6,7 @@ using Pley.API.Util;
 
 namespace Pley.TEST;
 
-public class CustomerServiceTests()
+public class CustomerServiceTests
 {
    [Fact]
     public void GetCustomerById_ReturnsNull_WhenNotFound()
