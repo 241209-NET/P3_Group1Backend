@@ -39,9 +39,9 @@ public class ReviewService : IReviewService
 
     public Review EditReviewById(Review existingReview, ReviewInDTO reviewIn)
     {
-        if (reviewIn.Rating != 0)                       // if rating is changed
+        if (reviewIn.Rating.HasValue)                       // if rating is changed
         {
-            existingReview.Rating = reviewIn.Rating;
+            existingReview.Rating = reviewIn.Rating.Value;
         }
 
         if (!string.IsNullOrEmpty(reviewIn.Comment))    // if comment is changed

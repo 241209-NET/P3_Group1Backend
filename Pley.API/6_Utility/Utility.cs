@@ -1,7 +1,5 @@
-using System.Collections.Generic;
 using Pley.API.DTO;
 using Pley.API.Model;
-using Pley.API.Service;
 
 namespace Pley.API.Util;
 
@@ -37,30 +35,17 @@ public class Utility
         };
     }
 
-    // public Review ReviewInDTOToReview(ReviewInDTO reviewInDTO)
-    // {
-    //     return new Review
-    //     {
-    //         Comment = reviewInDTO.Comment,
-    //         CustomerId = reviewInDTO.CustomerId,
-    //         StoreId = reviewInDTO.StoreId,
-    //         Rating = reviewInDTO.Rating
-    //     };
-    // }
-
     public Review ReviewInDTOToReview(ReviewInDTO reviewInDTO, int customerId, int storeId)
     {
         return new Review
         {
-            Rating = reviewInDTO.Rating,
-            Comment = reviewInDTO.Comment,
+            Rating = reviewInDTO.Rating ?? 0,           // default 0 if null
+            Comment = reviewInDTO.Comment ?? "",        // default "" if null (need to be nullable for patch)
             CustomerId = customerId,
             StoreId = storeId,
             LastUpdated = DateTime.Now
         };
     }
-
-
 
     public double GetAvgRating(List<Review> list)
     {
