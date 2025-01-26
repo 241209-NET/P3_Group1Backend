@@ -1,0 +1,14 @@
+namespace Pley.TEST;
+
+public class CustomerServiceTest()
+{
+    [[Fact]
+    public void TestName()
+    {
+        // Arrange
+    
+        // Act
+    
+        // Assert
+    }]
+}
