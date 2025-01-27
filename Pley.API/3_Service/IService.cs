@@ -5,12 +5,12 @@ namespace Pley.API.Service;
 
 public interface IStoreService
 {
-    StoreOutDTO CreateNewStore(StoreInDTO newStore); 
-    IEnumerable<StoreOutDTO> GetAllStores();
-    StoreOutDTO? GetStoreById(int id); 
-    StoreOutDTO? DeleteStoreById(int id);
-    StoreOutDTO? Login(string userName, string Password);
-    StoreOutDTO? GetStoreByUsername(string username);
+    Store CreateNewStore(StoreInDTO newStore); 
+    IEnumerable<Store> GetAllStores();
+    Store? GetStoreById(int id); 
+    Store? DeleteStoreById(int id);
+    Store? Login(string userName, string Password);
+    Store? GetStoreByUsername(string username);
 }
 
 public interface IReviewService

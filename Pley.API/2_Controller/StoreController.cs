@@ -23,7 +23,7 @@ public class StoresController : ControllerBase
             var store = _storeService.GetStoreById(id);
             if (store == null)
             {
-                return NotFound("No store found for id = " + id);
+                return NotFound($"No store found for id {id}");
             }
             return Ok(store);
         }
@@ -33,25 +33,6 @@ public class StoresController : ControllerBase
         }
         
     }
-    
-    [HttpGet("username/{username}")]
-    public IActionResult GetStoreByUsername(string username)
-    {
-        try
-        {
-            var store = _storeService.GetStoreByUsername(username);
-            if (store == null)
-            {
-                return NotFound("No user found for username = " + username);
-            }
-            return Ok(store);
-        }
-        catch(Exception e)
-        {
-            return BadRequest(e.Message);
-        }
-    }
-    
 
     [HttpPost]
     public IActionResult CreateNewStore([FromBody] StoreInDTO newStoreInDTO)
