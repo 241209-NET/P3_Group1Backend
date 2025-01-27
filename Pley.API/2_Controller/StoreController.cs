@@ -16,7 +16,7 @@ public class StoresController : ControllerBase
     }
 
     [HttpPost("login")]
-    public IActionResult Login([FromBody] StoreInDTO loginDTO)
+    public IActionResult Login([FromBody] LoginInDTO loginDTO)
     {
         try
         {
@@ -34,8 +34,8 @@ public class StoresController : ControllerBase
     }
 
     // patch for login
-    [HttpPatch("login")]
-    public IActionResult EditLogin([FromBody] LoginI )
+    // [HttpPatch("login")]
+    // public IActionResult EditLogin(int [FromBody] LoginInDTO)
     
 
     [HttpGet("{id}")]
@@ -75,7 +75,7 @@ public class StoresController : ControllerBase
         }
     }
 
-    // patch by store id
+    // patch by store id 
 
     [HttpGet]
     public IActionResult GetAllStores()
@@ -89,9 +89,9 @@ public class StoresController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult CreateNewStore([FromBody] StoreInDTO newStoreInDTO)
+    public IActionResult CreateNewStore([FromBody] SignUpInDTO signUpInDTO)
     {
-        var store = _storeService.CreateNewStore(newStoreInDTO);
+        var store = _storeService.CreateNewStore(signUpInDTO);
         if (store == null)
         {
             return BadRequest("Invalid input for creating a new store.");

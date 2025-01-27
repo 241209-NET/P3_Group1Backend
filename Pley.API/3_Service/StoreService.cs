@@ -28,9 +28,9 @@ public class StoreService : IStoreService
         throw new NotImplementedException();
     }
 
-    public Store CreateNewStore(StoreInDTO newStoreDTO)
+    public Store CreateNewStore(SignUpInDTO newStoreDTO)
     {
-        return _utility.StoreInDTOToStore(newStoreDTO);   
+        return _utility.SignUpInDTOToStore(newStoreDTO);   
     }
 
     public IEnumerable<Store> GetAllStores()

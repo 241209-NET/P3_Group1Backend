@@ -23,6 +23,16 @@ public class Utility
         };
     }
 
+    public Store SignUpInDTOToStore(SignUpInDTO signUpInDTO)
+    {
+        return new Store
+        {
+            Name = signUpInDTO.Name,
+            Username = signUpInDTO.Username,
+            Password = signUpInDTO.Password
+        };
+    }
+
     public Review ReviewInDTOToReview(ReviewInDTO reviewInDTO, int customerId, int storeId)
     {
         return new Review
