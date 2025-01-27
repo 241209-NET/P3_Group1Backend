@@ -5,15 +5,6 @@ namespace Pley.API.Util;
 
 public class Utility
 {
-    public StoreOutDTO StoreToStoreOutDTO(Store store)
-    {
-        return new StoreOutDTO
-        {
-            Id = store.Id,
-            Username = store.Username!
-        };
-    }
-
     public Store LoginInDTOToStore(LoginInDTO loginInDTO)
     {
         return new Store

@@ -15,6 +15,17 @@ public class StoresController : ControllerBase
         _storeService = storeService;
     }
 
+    [HttpPost("register")]
+    public IActionResult CreateNewStore([FromBody] SignUpInDTO signUpInDTO)
+    {
+        var store = _storeService.CreateNewStore(signUpInDTO);
+        if (store == null)
+        {
+            return BadRequest("Invalid input for creating a new store.");
+        }
+        return Ok(store);
+    }
+
     [HttpPost("login")]
     public IActionResult Login([FromBody] LoginInDTO loginDTO)
     {
@@ -46,7 +57,7 @@ public class StoresController : ControllerBase
             var store = _storeService.GetStoreById(id);
             if (store == null)
             {
-                return NotFound($"No store found for id {id}");
+                return NotFound($"No store found with Id {id}");
             }
             return Ok(store);
         }
@@ -54,7 +65,6 @@ public class StoresController : ControllerBase
         {
             return BadRequest(e.Message);
         }
-        
     }
 
     [HttpDelete("{id}")]
@@ -65,9 +75,9 @@ public class StoresController : ControllerBase
             var store = _storeService.DeleteStoreById(id);
             if (store == null)
             {
-                return NotFound($"No store found to delete for id = " + id);
+                return NotFound($"No store found with Id {id}");
             }
-            return Ok(store);
+            return Ok($"Successfully deleted store {id}");
         }
         catch(Exception e)
         {
@@ -83,19 +93,8 @@ public class StoresController : ControllerBase
         var userList = _storeService.GetAllStores();
         if(userList is null || !userList.Any()) 
         {
-            return NotFound("No stores found.");
+            return NotFound("No stores found");
         }
         return Ok(userList);
-    }
-
-    [HttpPost]
-    public IActionResult CreateNewStore([FromBody] SignUpInDTO signUpInDTO)
-    {
-        var store = _storeService.CreateNewStore(signUpInDTO);
-        if (store == null)
-        {
-            return BadRequest("Invalid input for creating a new store.");
-        }
-        return Ok(store);
     }
 }
