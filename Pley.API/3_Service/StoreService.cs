@@ -34,7 +34,8 @@ public class StoreService : IStoreService
 
     public Store? DeleteStoreById(int id)
     {
-        return _storeRepo.GetStoreById(id);
+        var store = _storeRepo.GetStoreById(id);
+        return _storeRepo.DeleteStoreById(store!);
     }
 
     // *authentication

@@ -8,7 +8,7 @@ public interface IStoreRepo
     Store? Login(string userName, string Password);
     // edit login    // *authentication
     Store? GetStoreById(int id); 
-    Store? DeleteStoreById(int id);
+    Store? DeleteStoreById(Store store);
     // edit store    // *authentication
     IEnumerable<Store> GetAllStores(); 
 }

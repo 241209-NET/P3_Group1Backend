@@ -6,7 +6,6 @@ namespace Pley.API.Repo;
 public class CustomerRepo : ICustomerRepo
 {
     private readonly PleyContext _pleyContext;
-
     public CustomerRepo(PleyContext pleyContext) => _pleyContext = pleyContext;
 
     public IEnumerable<Customer> GetAllCustomers()

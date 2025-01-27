@@ -6,9 +6,7 @@ namespace Pley.API.Repo;
 
 public class ReviewRepo : IReviewRepo
 {
-
     private readonly PleyContext _pleyContext;
-
     public ReviewRepo(PleyContext pleyContext) => _pleyContext = pleyContext;
 
     public Review? GetReviewById(int reviewId)
