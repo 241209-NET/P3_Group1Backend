@@ -30,8 +30,7 @@ public class StoreService : IStoreService
 
     public Store CreateNewStore(StoreInDTO newStoreDTO)
     {
-        return _utility.StoreInDTOToStore(newStoreDTO);
-        
+        return _utility.StoreInDTOToStore(newStoreDTO);   
     }
 
     public IEnumerable<Store> GetAllStores()
