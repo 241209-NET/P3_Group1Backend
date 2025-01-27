@@ -23,7 +23,7 @@ public class CustomerService : ICustomerService
     {
         var customers = _customerRepo.GetAllCustomers();
 
-        if (customers == null)
+        if (customers.Count() == 0)
         {
             return null!;
         }
@@ -39,30 +39,20 @@ public class CustomerService : ICustomerService
     public Customer? GetCustomerById(int id)
     {
         var customer = _customerRepo.GetCustomerById(id);
-        if (customer == null)
-        {
-            return null;
-        }
-
-        AvgRatingHelper(customer);
+        AvgRatingHelper(customer!);
         return customer;
     }
 
     public Customer? GetCustomerByName(string name)
     {
         var customer = _customerRepo.GetCustomerByName(name);
-        if (customer == null)
-        {
-            return null;
-        }
-        AvgRatingHelper(customer);
+        AvgRatingHelper(customer!);
         return customer;
     }
 
     public void AvgRatingHelper(Customer customer)
     {
         List<Review> list = _reviewRepo.GetAllReviews().Where(r => r.CustomerId == customer.Id).ToList();
-
         customer.AvgRating = _utility.GetAvgRating(list);
     }
 }

@@ -15,48 +15,10 @@ public class StoresController : ControllerBase
         _storeService = storeService;
     }
 
-    [HttpGet("{id}")]
-    public IActionResult GetStoreById(int id)
+    [HttpPost("register")]
+    public IActionResult CreateNewStore([FromBody] SignUpInDTO signUpInDTO)
     {
-        try
-        {
-            var store = _storeService.GetStoreById(id);
-            if (store == null)
-            {
-                return NotFound("No store found for id = " + id);
-            }
-            return Ok(store);
-        }
-        catch(Exception e)
-        {
-            return BadRequest(e.Message);
-        }
-        
-    }
-    
-    [HttpGet("username/{username}")]
-    public IActionResult GetStoreByUsername(string username)
-    {
-        try
-        {
-            var store = _storeService.GetStoreByUsername(username);
-            if (store == null)
-            {
-                return NotFound("No user found for username = " + username);
-            }
-            return Ok(store);
-        }
-        catch(Exception e)
-        {
-            return BadRequest(e.Message);
-        }
-    }
-    
-
-    [HttpPost]
-    public IActionResult CreateNewStore([FromBody] StoreInDTO newStoreInDTO)
-    {
-        var store = _storeService.CreateNewStore(newStoreInDTO);
+        var store = _storeService.CreateNewStore(signUpInDTO);
         if (store == null)
         {
             return BadRequest("Invalid input for creating a new store.");
@@ -64,43 +26,8 @@ public class StoresController : ControllerBase
         return Ok(store);
     }
 
-    [HttpDelete("{id}")]
-    public IActionResult DeleteStoreById(int id)
-    {
-        try
-        {
-            var store = _storeService.DeleteStoreById(id);
-            if (store == null)
-            {
-                return NotFound($"No store found to delete for id = " + id);
-            }
-            return Ok(store);
-        }
-        catch(Exception e)
-        {
-            return BadRequest(e.Message);
-        }
-    }
-
-    [HttpGet("home")]
-    public IActionResult Home()
-    {
-        return Ok("this works");
-    }
-
-    [HttpGet]
-    public IActionResult GetAllStores()
-    {
-        var userList = _storeService.GetAllStores();
-        if(userList is null || !userList.Any()) 
-        {
-            return NotFound("No stores found.");
-        }
-        return Ok(userList);
-    }
-
     [HttpPost("login")]
-    public IActionResult Login([FromBody] StoreInDTO loginDTO)
+    public IActionResult Login([FromBody] LoginInDTO loginDTO)
     {
         try
         {
@@ -111,13 +38,64 @@ public class StoresController : ControllerBase
             }
             return Ok(user);
         }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    // *authentication   (username, password)
+    // [HttpPatch("login")]
+    // public IActionResult EditLogin(int [FromBody] LoginInDTO)
+
+
+    [HttpGet("{id}")]
+    public IActionResult GetStoreById(int id)
+    {
+        try
+        {
+            var store = _storeService.GetStoreById(id);
+            if (store == null)
+            {
+                return NotFound($"No store found with Id {id}");
+            }
+            return Ok(store);
+        }
         catch(Exception e)
         {
             return BadRequest(e.Message);
         }
     }
 
-    // edit store
-    // patch - store name, description, URL
-    // patch - username, password
+    [HttpDelete("{id}")]
+    public IActionResult DeleteStoreById(int id)
+    {
+        try
+        {
+            var store = _storeService.DeleteStoreById(id);
+            if (store == null)
+            {
+                return NotFound($"No store found with Id {id}");
+            }
+            return Ok($"Successfully deleted store {id}");
+        }
+        catch(Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    // *authentication
+    // patch store details: Name, Description, URL
+
+    [HttpGet]
+    public IActionResult GetAllStores()
+    {
+        var userList = _storeService.GetAllStores();
+        if(userList is null || !userList.Any()) 
+        {
+            return NotFound("No stores found");
+        }
+        return Ok(userList);
+    }
 }

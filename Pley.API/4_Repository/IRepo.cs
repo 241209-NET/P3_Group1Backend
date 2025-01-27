@@ -5,11 +5,12 @@ namespace Pley.API.Repo;
 public interface IStoreRepo
 {
     Store CreateNewStore(Store newStore); 
-    IEnumerable<Store> GetAllStores(); 
+    Store? Login(string userName, string Password);
+    // edit login    // *authentication
     Store? GetStoreById(int id); 
-    Store? DeleteStoreById(int id);
-    Store? LoginStore(string userName, string Password);
-    Store? GetStoreByName(string username);
+    Store? DeleteStoreById(Store store);
+    // edit store    // *authentication
+    IEnumerable<Store> GetAllStores(); 
 }
 
 public interface IReviewRepo
