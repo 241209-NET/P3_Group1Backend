@@ -39,4 +39,4 @@ jobs:
         context: ./
         file: ./Dockerfile
         push: true
-        tags: index.docker.io/lypark5/pleyimage:latest, index.docker.io/lypark5/pleyImage:${{ github.sha }} 
+        tags: index.docker.io/lypark5/pleyimage:latest, index.docker.io/lypark5/pleyimage:${{ github.sha }} 
