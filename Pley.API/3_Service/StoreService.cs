@@ -1,19 +1,12 @@
 using Pley.API.DTO;
 using Pley.API.Repo;
 using Pley.API.Util;
+using Pley.API.Model;
 
 namespace Pley.API.Service;
 
 public class StoreService : IStoreService
 {
-
-    //     StoreOutDTO CreateNewStore(StoreInDTO newStore); 
-    // IEnumerable<Store> GetAllStores();
-    // StoreOutDTO? GetStoreById(int id); 
-    // StoreOutDTO? DeleteStoreById(int id);
-    // StoreOutDTO? Login(string userName, string Password);
-    // StoreOutDTO? GetStoreByUsername(string username);
-
     private readonly IStoreRepo _storeRepo;
     private readonly Utility _utility;
     public StoreService(IStoreRepo storeRepo, Utility utility)
@@ -22,51 +15,34 @@ public class StoreService : IStoreService
         _utility = utility;
     }
 
-    public StoreOutDTO? Login(string Username, string Password)
+    public Store CreateNewStore(SignUpInDTO newStoreDTO)
     {
-        throw new NotImplementedException();
+        var store = _utility.SignUpInDTOToStore(newStoreDTO);
+        return _storeRepo.CreateNewStore(store);
     }
 
-    public StoreOutDTO CreateNewStore(StoreInDTO newStoreDTO)
+    // *authentication
+    public Store Login(string username, string password) 
     {
-        var store = _utility.StoreInDTOToStore(newStoreDTO);
-        var newStore = _storeRepo.CreateNewStore(store);        
-        return _utility.StoreToStoreOutDTO(newStore);
+        throw new NotImplementedException();        
     }
 
-    public IEnumerable<StoreOutDTO> GetAllStores()
+    public Store? GetStoreById(int id)
     {
-        var stores = _storeRepo.GetAllStores();
-
-        return stores.Select(_utility.StoreToStoreOutDTO);
+        return _storeRepo.GetStoreById(id);
     }
 
-    public StoreOutDTO? GetStoreById(int id)
+    public Store? DeleteStoreById(int id)
     {
         var store = _storeRepo.GetStoreById(id);
-
-        if(store is null)
-            return null;
-
-        return _utility.StoreToStoreOutDTO(store);
+        return _storeRepo.DeleteStoreById(store!);
     }
 
-    public StoreOutDTO? DeleteStoreById(int id)
+    // *authentication
+    // edit store details function
+
+    public IEnumerable<Store> GetAllStores()
     {
-        var store = _storeRepo.GetStoreById(id);
-
-        if (store is not null)
-        {
-            _storeRepo.DeleteStoreById(id);
-            return _utility.StoreToStoreOutDTO(store);
-        }
-
-        return null;
+        return _storeRepo.GetAllStores();
     }
-
-    public StoreOutDTO GetStoreByUsername(string Username)
-    {
-        throw new NotImplementedException();
-    }
-
 }

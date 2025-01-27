@@ -5,12 +5,13 @@ namespace Pley.API.Service;
 
 public interface IStoreService
 {
-    StoreOutDTO CreateNewStore(StoreInDTO newStore); 
-    IEnumerable<StoreOutDTO> GetAllStores();
-    StoreOutDTO? GetStoreById(int id); 
-    StoreOutDTO? DeleteStoreById(int id);
-    StoreOutDTO? Login(string userName, string Password);
-    StoreOutDTO? GetStoreByUsername(string username);
+    Store CreateNewStore(SignUpInDTO signUpInDTO); 
+    Store? Login(string username, string password);
+    // edit login    // *authentication
+    Store? GetStoreById(int id); 
+    Store? DeleteStoreById(int id);
+    // edit store    // *authentication
+    IEnumerable<Store> GetAllStores();
 }
 
 public interface IReviewService
@@ -19,7 +20,7 @@ public interface IReviewService
     Review? DeleteReviewById(int id);
     Review EditReviewById(Review existingReview, ReviewInDTO reviewIn);     // guaranteedd not null ever because of controller
     IEnumerable<Review> GetAllReviews();
-    // Review CreateNewReview(ReviewInDTO newReview);
+    // Review CreateNewReview(ReviewInDTO newReview);   // *authentication
 }
 
 public interface ICustomerService
