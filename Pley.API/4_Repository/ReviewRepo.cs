@@ -1,6 +1,6 @@
 using Pley.API.Model;
 using Pley.API.Data;
-//using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace Pley.API.Repo;
 
@@ -13,13 +13,15 @@ public class ReviewRepo : IReviewRepo
 
     public Review? GetReviewById(int reviewId)
     {
-        var review = _pleyContext.Reviews.Find(reviewId);
-        if (review == null)
+        try
+        {
+            var review = _pleyContext.Reviews.Include(r => r.Store).Include(r => r.Customer).FirstOrDefault(r => r.Id == reviewId);
+            return review;
+        }
+        catch (Exception e)
         {
             return null;
         }
-
-        return review;
     }
 
     public Review? DeleteReviewById(int id)
@@ -45,7 +47,7 @@ public class ReviewRepo : IReviewRepo
 
     public IEnumerable<Review> GetAllReviews()
     {
-        return _pleyContext.Reviews.ToList();
+        return _pleyContext.Reviews.Include(r => r.Store).Include(r => r.Customer).ToList();
     }
 
 

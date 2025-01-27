@@ -36,7 +36,7 @@ public class Utility
     }
 
     public double GetAvgRating(List<Review> list)
-    {
+    { 
         double sum = 0;
         foreach (var review in list)
         {
