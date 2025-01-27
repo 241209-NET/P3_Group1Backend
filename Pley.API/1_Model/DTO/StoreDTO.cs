@@ -1,7 +1,7 @@
 
 namespace Pley.API.DTO;
 
-public class StoreInDTO
+public class LoginInDTO
 {
     public required string Username { get; set; }
     public required string Password { get; set; }
