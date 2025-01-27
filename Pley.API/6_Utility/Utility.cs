@@ -23,18 +23,6 @@ public class Utility
         };
     }
 
-    public ReviewOutDTO ReviewToReviewOutDTO(Review review)
-    {
-        return new ReviewOutDTO
-        {
-            Comment = review.Comment,
-            CustomerId = review.CustomerId, 
-            StoreId = review.StoreId,
-            LastUpdated = review.LastUpdated,
-            Rating = review.Rating
-        };
-    }
-
     public Review ReviewInDTOToReview(ReviewInDTO reviewInDTO, int customerId, int storeId)
     {
         return new Review
@@ -50,11 +38,11 @@ public class Utility
     public double GetAvgRating(List<Review> list)
     {
         double sum = 0;
-        foreach(var review in list)
+        foreach (var review in list)
         {
             sum += review.Rating;
         }
-        if (list.Count > 0) return sum / list.Count;
+        if (list.Count > 0) return Math.Round(sum / list.Count, 1);
 
         return 0;
     }
