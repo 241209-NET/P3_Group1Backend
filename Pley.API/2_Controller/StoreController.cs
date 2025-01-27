@@ -15,6 +15,29 @@ public class StoresController : ControllerBase
         _storeService = storeService;
     }
 
+    [HttpPost("login")]
+    public IActionResult Login([FromBody] StoreInDTO loginDTO)
+    {
+        try
+        {
+            var user = _storeService.Login(loginDTO.Username, loginDTO.Password);
+            if (user == null)
+            {
+                return Unauthorized("Invalid username or password.");
+            }
+            return Ok(user);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    // patch for login
+    [HttpPatch("login")]
+    public IActionResult EditLogin([FromBody] LoginI )
+    
+
     [HttpGet("{id}")]
     public IActionResult GetStoreById(int id)
     {
@@ -32,17 +55,6 @@ public class StoresController : ControllerBase
             return BadRequest(e.Message);
         }
         
-    }
-
-    [HttpPost]
-    public IActionResult CreateNewStore([FromBody] StoreInDTO newStoreInDTO)
-    {
-        var store = _storeService.CreateNewStore(newStoreInDTO);
-        if (store == null)
-        {
-            return BadRequest("Invalid input for creating a new store.");
-        }
-        return Ok(store);
     }
 
     [HttpDelete("{id}")]
@@ -63,11 +75,7 @@ public class StoresController : ControllerBase
         }
     }
 
-    [HttpGet("home")]
-    public IActionResult Home()
-    {
-        return Ok("this works");
-    }
+    // patch by store id
 
     [HttpGet]
     public IActionResult GetAllStores()
@@ -80,25 +88,14 @@ public class StoresController : ControllerBase
         return Ok(userList);
     }
 
-    [HttpPost("login")]
-    public IActionResult Login([FromBody] StoreInDTO loginDTO)
+    [HttpPost]
+    public IActionResult CreateNewStore([FromBody] StoreInDTO newStoreInDTO)
     {
-        try
+        var store = _storeService.CreateNewStore(newStoreInDTO);
+        if (store == null)
         {
-            var user = _storeService.Login(loginDTO.Username, loginDTO.Password);
-            if (user == null)
-            {
-                return Unauthorized("Invalid username or password.");
-            }
-            return Ok(user);
+            return BadRequest("Invalid input for creating a new store.");
         }
-        catch(Exception e)
-        {
-            return BadRequest(e.Message);
-        }
+        return Ok(store);
     }
-
-    // edit store
-    // patch - store name, description, URL
-    // patch - username, password
 }
