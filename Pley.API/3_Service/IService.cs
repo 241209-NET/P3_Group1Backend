@@ -7,10 +7,10 @@ public interface IStoreService
 {
     Store CreateNewStore(SignUpInDTO signUpInDTO); 
     Store? Login(string username, string password);
-    // edit login info
+    // edit login    // *authentication
     Store? GetStoreById(int id); 
     Store? DeleteStoreById(int id);
-    // edit store by id
+    // edit store    // *authentication
     IEnumerable<Store> GetAllStores();
 }
 
@@ -20,7 +20,7 @@ public interface IReviewService
     Review? DeleteReviewById(int id);
     Review EditReviewById(Review existingReview, ReviewInDTO reviewIn);     // guaranteedd not null ever because of controller
     IEnumerable<Review> GetAllReviews();
-    // Review CreateNewReview(ReviewInDTO newReview);
+    // Review CreateNewReview(ReviewInDTO newReview);   // *authentication
 }
 
 public interface ICustomerService

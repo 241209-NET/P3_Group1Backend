@@ -17,24 +17,12 @@ public class ReviewService : IReviewService
 
     public Review? GetReviewById(int id)
     {
-        var review = _reviewRepo.GetReviewById(id);
-
-        if(review is null)
-        {
-            return null;
-        }
-
-        return review;
+        return _reviewRepo.GetReviewById(id);
     }
 
     public Review? DeleteReviewById(int id)
     {
-        var deletedReview = _reviewRepo.DeleteReviewById(id);
-        if (deletedReview == null)
-        {
-            return null;
-        }
-        return deletedReview;
+        return _reviewRepo.DeleteReviewById(id);
     }
 
     public Review EditReviewById(Review existingReview, ReviewInDTO reviewIn)
@@ -56,8 +44,7 @@ public class ReviewService : IReviewService
 
     public IEnumerable<Review> GetAllReviews()
     {
-        var reviews = _reviewRepo.GetAllReviews();
-        return reviews;
+        return _reviewRepo.GetAllReviews();
     }
 
     // public ReviewOutDTO CreateNewReview(ReviewInDTO newReviewInDTO)

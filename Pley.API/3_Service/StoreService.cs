@@ -7,14 +7,6 @@ namespace Pley.API.Service;
 
 public class StoreService : IStoreService
 {
-
-    //     Store CreateNewStore(StoreInDTO newStore); 
-    // IEnumerable<Store> GetAllStores();
-    // Store? GetStoreById(int id); 
-    // Store? DeleteStoreById(int id);
-    // Store? Login(string userName, string Password);
-    // Store? GetStoreByUsername(string username);
-
     private readonly IStoreRepo _storeRepo;
     private readonly Utility _utility;
     public StoreService(IStoreRepo storeRepo, Utility utility)
@@ -23,19 +15,16 @@ public class StoreService : IStoreService
         _utility = utility;
     }
 
-    public Store Login(string Username, string Password)
-    {
-        throw new NotImplementedException();
-    }
-
     public Store CreateNewStore(SignUpInDTO newStoreDTO)
     {
-        return _utility.SignUpInDTOToStore(newStoreDTO);   
+        var store = _utility.SignUpInDTOToStore(newStoreDTO);
+        return _storeRepo.CreateNewStore(store);
     }
 
-    public IEnumerable<Store> GetAllStores()
+    // *authentication
+    public Store Login(string username, string password) 
     {
-        return _storeRepo.GetAllStores();
+        throw new NotImplementedException();        
     }
 
     public Store? GetStoreById(int id)
@@ -48,9 +37,11 @@ public class StoreService : IStoreService
         return _storeRepo.GetStoreById(id);
     }
 
-    public Store GetStoreByUsername(string Username)
-    {
-        throw new NotImplementedException();
-    }
+    // *authentication
+    // edit store details function
 
+    public IEnumerable<Store> GetAllStores()
+    {
+        return _storeRepo.GetAllStores();
+    }
 }

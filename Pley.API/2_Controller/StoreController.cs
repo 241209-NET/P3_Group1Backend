@@ -44,10 +44,10 @@ public class StoresController : ControllerBase
         }
     }
 
-    // patch for login
+    // *authentication   (username, password)
     // [HttpPatch("login")]
     // public IActionResult EditLogin(int [FromBody] LoginInDTO)
-    
+
 
     [HttpGet("{id}")]
     public IActionResult GetStoreById(int id)
@@ -85,7 +85,8 @@ public class StoresController : ControllerBase
         }
     }
 
-    // patch by store id 
+    // *authentication
+    // patch store details: Name, Description, URL
 
     [HttpGet]
     public IActionResult GetAllStores()
