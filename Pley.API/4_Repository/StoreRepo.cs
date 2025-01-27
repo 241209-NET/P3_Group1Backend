@@ -18,7 +18,7 @@ public class StoreRepo : IStoreRepo
         return newStore;
     }
 
-    public Store LoginStore(string Username, string Password)
+    public Store Login(string Username, string Password)
     {
         throw new NotImplementedException();
     }
