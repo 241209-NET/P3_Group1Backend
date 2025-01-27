@@ -14,12 +14,12 @@ public class Utility
         };
     }
 
-    public Store StoreInDTOToStore(StoreInDTO storeInDTO)
+    public Store LoginInDTOToStore(LoginInDTO loginInDTO)
     {
         return new Store
         {
-            Username = storeInDTO.Username,
-            Password = storeInDTO.Password
+            Username = loginInDTO.Username,
+            Password = loginInDTO.Password
         };
     }
 
