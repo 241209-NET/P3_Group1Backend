@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Pley.API.Service;
 using Microsoft.AspNetCore.Authorization;
 using Pley.API.DTO;
+using System.Security.Claims;
 
 namespace Pley.API.Controller;
 
@@ -58,25 +59,26 @@ public class CustomersController : ControllerBase
         }
     }
 
-    [Authorize]
-    [HttpPost("{storeId}/{customerId}/reviews")]
-    public IActionResult CreateNewReview(int storeId, int customerId, [FromBody] ReviewInDTO reviewIn)
-    {
-        try
-        {
-            var review = _reviewService.CreateNewReview(storeId, customerId, reviewIn);
-            if (review == null)
-            {
-                return BadRequest("Invalid input");
-            }
-            return Ok(review);
-        }
-        catch (Exception e)
-        {
-            return BadRequest(e.Message);
-        }
-    }
+    // [Authorize]
+    // [HttpPost("{storeId}/{customerId}/reviews")]
+    // public IActionResult CreateNewReview(int storeId, int customerId, [FromBody] ReviewInDTO reviewIn)
+    // {
+    //     try
+    //     {
+    //         //var review = _reviewService.CreateNewReview(storeId, customerId, reviewIn);
+    //         if (review == null)
+    //         {
+    //             return BadRequest("Invalid input");
+    //         }
+    //         return Ok(review);
+    //     }
+    //     catch (Exception e)
+    //     {
+    //         return BadRequest(e.Message);
+    //     }
+    // }
 
+    [Authorize]
     [HttpGet("name/{name}")]
     public IActionResult GetCustomerByName(string name)
     {

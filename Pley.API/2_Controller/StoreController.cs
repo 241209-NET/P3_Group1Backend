@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Pley.API.DTO;
@@ -42,13 +43,17 @@ public class StoresController : ControllerBase
     }
 
     [Authorize]
-    [HttpPatch("{id}/login")]
+    [HttpPatch("login")]
     public IActionResult UpdateLogin(int id, [FromBody] EditLoginInDTO loginInDTO)
     {
         try
-        {
+         {
+        //     var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //     var name1 = User.Identity.Name;
+        //     Console.WriteLine($"user name: {name1}");
+        //     Console.WriteLine($"user ID: {userID}");
+        //     var store = _storeService.GetStoreById(userID);
             var store = _storeService.GetStoreById(id);
-
             var updatedStore = _storeService.UpdateLogin(store, loginInDTO);
             return Ok(updatedStore);
         }

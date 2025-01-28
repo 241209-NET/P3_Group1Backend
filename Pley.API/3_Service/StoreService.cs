@@ -52,6 +52,7 @@ public class StoreService : IStoreService
         var claims = new[]
         {
             new Claim(JwtRegisteredClaimNames.UniqueName, user.Username),
+            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         };
 
@@ -129,4 +130,8 @@ public class StoreService : IStoreService
         return _storeRepo.GetAllStores();
     }
 
+    // public Store? Login(string userName, string Password)
+    // {
+    //     return _storeRepo.Login(userName);
+    // }
 }

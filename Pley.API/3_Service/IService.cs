@@ -6,7 +6,7 @@ namespace Pley.API.Service;
 public interface IStoreService
 {
     Store CreateNewStore(SignUpInDTO signUpInDTO);
-    object? Login(string username, string password);
+    object Login(string username, string password);
     Store? UpdateLogin(Store store, EditLoginInDTO loginInDTO);
     Store? GetStoreById(int id); 
     Store? DeleteStoreById(int id);
