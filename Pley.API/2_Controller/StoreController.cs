@@ -42,11 +42,13 @@ public class StoresController : ControllerBase
     }
 
     [HttpPatch("{id}/login")]
-    public IActionResult UpdateLogin(int id, [FromBody] LoginInDTO loginInDTO)
+    public IActionResult UpdateLogin(int id, [FromBody] EditLoginInDTO loginInDTO)
     {
         try
         {
-            var updatedStore = _storeService.UpdateLogin(id, loginInDTO);
+            var store = _storeService.GetStoreById(id);
+
+            var updatedStore = _storeService.UpdateLogin(store, loginInDTO);
             return Ok(updatedStore);
         }
         catch (Exception e)

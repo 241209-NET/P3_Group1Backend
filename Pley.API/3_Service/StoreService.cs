@@ -32,23 +32,28 @@ public class StoreService : IStoreService
     public object Login(string username, string password)
     {
         if (string.IsNullOrWhiteSpace(username))
-            throw new ArgumentException();
+            throw new ArgumentException("Invalid Username");
 
         if (string.IsNullOrWhiteSpace(password))
-            throw new ArgumentException();
+            throw new ArgumentException("Invalid Password");
 
         var user = _storeRepo.Login(username);
 
         if (user == null || password != user.Password)
         {
-            throw new UnauthorizedAccessException("Invalid username or password.");
+
+            if(user == null)
+                throw new UnauthorizedAccessException("Invalid Username.");
+
+            if(password != user.Password)   
+                throw new UnauthorizedAccessException("Invalid Password.");
         }
 
         var claims = new[]
         {
-        new Claim(JwtRegisteredClaimNames.UniqueName, user.Username),
-        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-    };
+            new Claim(JwtRegisteredClaimNames.UniqueName, user.Username),
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+        };
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]!));
         var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -68,13 +73,8 @@ public class StoreService : IStoreService
         };
     }
 
-    public Store? UpdateLogin(int id, LoginInDTO loginInDTO)
+    public Store? UpdateLogin(Store store, EditLoginInDTO loginInDTO)
     {
-        var store = _storeRepo.GetStoreById(id);
-        if (store == null)
-        {
-            throw new KeyNotFoundException($"Store with Id {id} not found");
-        }
 
         if (!string.IsNullOrWhiteSpace(loginInDTO.Username))
         {

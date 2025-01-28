@@ -7,7 +7,7 @@ public interface IStoreService
 {
     Store CreateNewStore(SignUpInDTO signUpInDTO);
     object? Login(string username, string password);
-    Store? UpdateLogin(int id, LoginInDTO loginInDTO);
+    Store? UpdateLogin(Store store, EditLoginInDTO loginInDTO);
     Store? GetStoreById(int id); 
     Store? DeleteStoreById(int id);
     Store? UpdateStore(int id, EditStoreDTO editStoreDTO);

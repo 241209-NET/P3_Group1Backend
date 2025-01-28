@@ -7,6 +7,12 @@ public class LoginInDTO
     public required string Password { get; set; }
 }
 
+public class EditLoginInDTO
+{
+    public string? Username { get; set; }
+    public string? Password { get; set; }
+}
+
 public class SignUpInDTO
 {
     public required string Name { get; set; }
