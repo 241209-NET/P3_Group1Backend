@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Pley.API.DTO;
 using Pley.API.Service;
+using System.Security.Claims;
 
 namespace Pley.API.Controller;
 
@@ -44,16 +45,15 @@ public class StoresController : ControllerBase
 
     [Authorize]
     [HttpPatch("login")]
-    public IActionResult UpdateLogin(int id, [FromBody] EditLoginInDTO loginInDTO)
+    public IActionResult UpdateLogin([FromBody] EditLoginInDTO loginInDTO)
     {
         try
          {
-        //     var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        //     var name1 = User.Identity.Name;
-        //     Console.WriteLine($"user name: {name1}");
-        //     Console.WriteLine($"user ID: {userID}");
-        //     var store = _storeService.GetStoreById(userID);
-            var store = _storeService.GetStoreById(id);
+            var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var name1 = User.Identity.Name;
+
+            var store = _storeService.GetStoreById(int.Parse(userID));
+            //var store = _storeService.GetStoreById(id);
             var updatedStore = _storeService.UpdateLogin(store, loginInDTO);
             return Ok(updatedStore);
         }
