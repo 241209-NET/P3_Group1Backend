@@ -12,8 +12,8 @@ using Pley.API.Data;
 namespace Pley.API.Migrations
 {
     [DbContext(typeof(PleyContext))]
-    [Migration("20250126213413_first")]
-    partial class first
+    [Migration("20250128005035_initialAdd")]
+    partial class initialAdd
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

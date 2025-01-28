@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Pley.API.DTO;
 using Pley.API.Service;
@@ -31,23 +32,29 @@ public class StoresController : ControllerBase
     {
         try
         {
-            var user = _storeService.Login(loginDTO.Username, loginDTO.Password);
-            if (user == null)
-            {
-                return Unauthorized("Invalid username or password.");
-            }
-            return Ok(user);
+            var result = _storeService.Login(loginDTO.Username, loginDTO.Password);
+            return Ok(result);
+        }
+        catch (Exception)
+        {
+            return BadRequest("Invalid username or password.");
+        }
+    }
+
+    [HttpPatch("{id}/login")]
+    public IActionResult UpdateLogin(int id, [FromBody] LoginInDTO loginInDTO)
+    {
+        try
+        {
+            var updatedStore = _storeService.UpdateLogin(id, loginInDTO);
+            return Ok(updatedStore);
         }
         catch (Exception e)
         {
             return BadRequest(e.Message);
         }
+
     }
-
-    // *authentication   (username, password)
-    // [HttpPatch("login")]
-    // public IActionResult EditLogin(int [FromBody] LoginInDTO)
-
 
     [HttpGet("{id}")]
     public IActionResult GetStoreById(int id)
@@ -61,7 +68,7 @@ public class StoresController : ControllerBase
             }
             return Ok(store);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             return BadRequest(e.Message);
         }
@@ -79,20 +86,31 @@ public class StoresController : ControllerBase
             }
             return Ok($"Successfully deleted store {id}");
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             return BadRequest(e.Message);
         }
     }
 
-    // *authentication
-    // patch store details: Name, Description, URL
+    [HttpPatch("{id}")]
+    public IActionResult UpdateStore(int id, [FromBody] EditStoreDTO editStoreDTO)
+    {
+        try
+        {
+            var updatedStore = _storeService.UpdateStore(id, editStoreDTO);
+            return Ok(updatedStore);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
 
     [HttpGet]
     public IActionResult GetAllStores()
     {
         var userList = _storeService.GetAllStores();
-        if(userList is null || !userList.Any()) 
+        if (userList is null || !userList.Any())
         {
             return NotFound("No stores found");
         }
