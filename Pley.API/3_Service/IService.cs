@@ -20,7 +20,7 @@ public interface IReviewService
     Review? DeleteReviewById(int id);
     Review EditReviewById(Review existingReview, ReviewInDTO reviewIn);     // guaranteedd not null ever because of controller
     IEnumerable<Review> GetAllReviews();
-    // Review CreateNewReview(ReviewInDTO newReview);   // *authentication
+    Review CreateNewReview(int storeId, int customerId, ReviewInDTO newReview);   // *authentication
 }
 
 public interface ICustomerService

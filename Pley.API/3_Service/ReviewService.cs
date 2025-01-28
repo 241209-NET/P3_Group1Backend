@@ -8,10 +8,15 @@ namespace Pley.API.Service;
 public class ReviewService : IReviewService
 {
     private readonly IReviewRepo _reviewRepo;
+    private readonly IStoreRepo _storeRepo;
+    private readonly ICustomerRepo _customerRepo;
+
     private readonly Utility _utility;
-    public ReviewService(IReviewRepo reviewRepo, Utility utility)
+    public ReviewService(IReviewRepo reviewRepo, Utility utility, ICustomerRepo customerRepo, IStoreRepo storeRepo)
     {
         _reviewRepo = reviewRepo;
+        _storeRepo = storeRepo;
+        _customerRepo = customerRepo;
         _utility = utility;
     }
 
@@ -47,11 +52,22 @@ public class ReviewService : IReviewService
         return _reviewRepo.GetAllReviews();
     }
 
-    // public ReviewOutDTO CreateNewReview(ReviewInDTO newReviewInDTO)
-    // {
-    //     var review = _utility.ReviewInDTOToReview(newReviewInDTO);
-    //     review.LastUpdated = DateTime.UtcNow;
-    //     var newReview = _reviewRepo.CreateNewReview(review);
-    //     return _utility.ReviewToReviewOutDTO(newReview);
-    // }
+    public Review CreateNewReview(int storeId, int customerId, ReviewInDTO newReview)
+    {
+
+        var store = _storeRepo.GetStoreById(storeId);
+        var customer = _customerRepo.GetCustomerById(customerId);
+        if(store == null ){
+            throw new ArgumentException("Invalid Store.");
+        }
+
+        if (customer == null)
+            throw new ArgumentException("Invalid Customer.");
+
+        var reviewDTO = _utility.ReviewInDTOToReview(newReview, customerId, storeId);
+        var review = _reviewRepo.CreateNewReview(reviewDTO);
+
+        return review;
+    }
+
 }

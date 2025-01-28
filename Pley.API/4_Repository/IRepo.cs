@@ -18,7 +18,7 @@ public interface IReviewRepo
     Review? DeleteReviewById(int id);
     Review UpdateReview(Review existingReview); // guaranteedd not null ever because of controller
     IEnumerable<Review> GetAllReviews(); 
-    // Review CreateNewReview(Review newReview);
+    Review CreateNewReview(Review newReview);
 }
 
 public interface ICustomerRepo

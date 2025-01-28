@@ -57,10 +57,10 @@ public class ReviewRepo : IReviewRepo
     //     return _pleyContext.Reviews.Where(r => r.StoreId == storeId); //.Include(u => u.Store).ToList();
     // }
 
-    // public Review CreateNewReview(Review newReview)
-    // {
-    //     _pleyContext.Reviews.Add(newReview);
-    //     _pleyContext.SaveChanges();
-    //     return newReview;
-    // }
+    public Review CreateNewReview(Review newReview)
+    {
+        _pleyContext.Reviews.Add(newReview);
+        _pleyContext.SaveChanges();
+        return newReview;
+    }
 }

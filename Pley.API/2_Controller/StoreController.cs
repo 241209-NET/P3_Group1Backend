@@ -41,6 +41,7 @@ public class StoresController : ControllerBase
         }
     }
 
+    [Authorize]
     [HttpPatch("{id}/login")]
     public IActionResult UpdateLogin(int id, [FromBody] EditLoginInDTO loginInDTO)
     {
@@ -58,6 +59,7 @@ public class StoresController : ControllerBase
 
     }
 
+    [Authorize]
     [HttpGet("{id}")]
     public IActionResult GetStoreById(int id)
     {
@@ -76,6 +78,7 @@ public class StoresController : ControllerBase
         }
     }
 
+    [Authorize]
     [HttpDelete("{id}")]
     public IActionResult DeleteStoreById(int id)
     {
@@ -94,6 +97,7 @@ public class StoresController : ControllerBase
         }
     }
 
+    [Authorize]
     [HttpPatch("{id}")]
     public IActionResult UpdateStore(int id, [FromBody] EditStoreDTO editStoreDTO)
     {
@@ -108,6 +112,7 @@ public class StoresController : ControllerBase
         }
     }
 
+    [Authorize]
     [HttpGet]
     public IActionResult GetAllStores()
     {

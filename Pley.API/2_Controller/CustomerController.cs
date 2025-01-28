@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Pley.API.Service;
+using Microsoft.AspNetCore.Authorization;
 using Pley.API.DTO;
 
 namespace Pley.API.Controller;
@@ -16,6 +17,7 @@ public class CustomersController : ControllerBase
         _reviewService = reviewService;
     }
 
+    [Authorize]
     [HttpDelete("{customerId}/reviews/{reviewId}")]
     public IActionResult DeleteReviewById(int reviewId)
     {
@@ -34,6 +36,7 @@ public class CustomersController : ControllerBase
         }
     }
 
+    [Authorize]
     [HttpPatch("{customerId}/reviews/{reviewId}")]
     public IActionResult EditReviewById(int reviewId, [FromBody] ReviewInDTO reviewIn)
     {
@@ -55,35 +58,24 @@ public class CustomersController : ControllerBase
         }
     }
 
-    // [HttpPost("{customerId}/reviews")]
-    // public IActionResult CreateNewReview([FromBody] ReviewInDTO newReviewInDTO)
-    // {
-    //     var review = _reviewService.CreateNewReview(newReviewInDTO);
-    //     if(review is null){
-    //         return BadRequest("improper input.");
-    //     }
-    //     return Ok(review);
-    // }
-
-    // [HttpPost("{customerId}/reviews")]
-    // public IActionResult CreateNewReview([FromBody] ReviewInDTO reviewIn)
-    // {
-    //     try
-    //     {
-    //         // var customerId = find a way to get customerId 
-    //         // var storeId = find a way to get storeId from authentication
-    //         var review = _reviewService.CreateNewReview(reviewIn, storeId, customerId);
-    //         if (review is null)
-    //         {
-    //             return BadRequest("Invalid input");
-    //         }
-    //         return Ok(review);
-    //     }
-    //     catch (Exception e)
-    //     {
-    //         return BadRequest(e.Message);
-    //     }
-    // }
+    [Authorize]
+    [HttpPost("{storeId}/{customerId}/reviews")]
+    public IActionResult CreateNewReview(int storeId, int customerId, [FromBody] ReviewInDTO reviewIn)
+    {
+        try
+        {
+            var review = _reviewService.CreateNewReview(storeId, customerId, reviewIn);
+            if (review == null)
+            {
+                return BadRequest("Invalid input");
+            }
+            return Ok(review);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
 
     [HttpGet("name/{name}")]
     public IActionResult GetCustomerByName(string name)
