@@ -86,11 +86,18 @@ public class StoresController : ControllerBase
     {
         try
         {
-            var store = _storeService.DeleteStoreById(id);
+            var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var store = _storeService.DeleteStoreById(int.Parse(userID));
             if (store == null)
             {
                 return NotFound($"No store found with Id {id}");
             }
+
+            if (id != int.Parse(userID))
+                return Unauthorized("You do not have permission to perform this action.");
+
+
             return Ok($"Successfully deleted store {id}");
         }
         catch (Exception e)
@@ -110,7 +117,7 @@ public class StoresController : ControllerBase
             var store = _storeService.GetStoreById(int.Parse(userID));
             if (int.Parse(userID) != id)
             {
-                return Unauthorized("You do not have permission to make this update.");
+                return Unauthorized("You do not have permission to perform this action.");
             }
 
             var updatedStore = _storeService.UpdateStore(id, editStoreDTO);
@@ -122,7 +129,7 @@ public class StoresController : ControllerBase
         }
     }
 
-    [Authorize]
+    //[Authorize]
     [HttpGet]
     public IActionResult GetAllStores()
     {
