@@ -16,7 +16,7 @@ public class StoreServiceTests
         var storeRepoMock = new Mock<IStoreRepo>();
         var utility = new Utility(); 
 
-        var store = new Store 
+        var store = new Store
         { 
             Id = 1, Username = "store1", Password = "password123"
         };
@@ -82,7 +82,8 @@ public class StoreServiceTests
         };
 
         storeRepoMock.Setup(repo => repo.GetStoreById(It.IsAny<int>())).Returns(store);
-        storeRepoMock.Setup(repo => repo.DeleteStoreById(It.IsAny<int>())).Verifiable();
+        storeRepoMock.Setup(repo => repo.DeleteStoreById(It.Is<Store>(s => s.Id == 1))).Returns(store);
+
 
         var storeService = new StoreService(storeRepoMock.Object, utility);
 
@@ -92,7 +93,8 @@ public class StoreServiceTests
         // Assert
         Assert.NotNull(result);
         Assert.Equal("store1", result.Username);
-        storeRepoMock.Verify(repo => repo.DeleteStoreById(It.IsAny<int>()), Times.Once);
+        Assert.Equal(1, result?.Id);
+        storeRepoMock.Verify(repo => repo.DeleteStoreById(It.Is<Store>(s => s.Id == 1)), Times.Once);
     }
 
     [Fact]
@@ -101,12 +103,16 @@ public class StoreServiceTests
         // Arrange
         var storeRepoMock = new Mock<IStoreRepo>();
         var utility = new Utility();
-        var newStoreDTO = new StoreInDTO 
+        var newStoreDTO = new SignUpInDTO  
         { 
-            Username = "store1", Password = "password123" 
+            Username = "store1", Password = "password123", Name = "Starbucks" 
         };
 
-        var store = new Store { Id = 1, Username = "store1", Password = "password123" };
+        var store = new Store 
+        { 
+            Id = 1, Username = "store1", Password = "password123", Name = "Starbucks" 
+        };
+        
         storeRepoMock.Setup(repo => repo.CreateNewStore(It.IsAny<Store>())).Returns(store);
 
         var storeService = new StoreService(storeRepoMock.Object, utility);

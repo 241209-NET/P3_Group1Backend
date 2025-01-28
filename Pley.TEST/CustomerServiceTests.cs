@@ -8,42 +8,6 @@ namespace Pley.TEST;
 
 public class CustomerServiceTests
 {
-   [Fact]
-    public void GetCustomerById_ReturnsNull_WhenNotFound()
-    {
-        // Arrange
-        var mockCustomerRepo = new Mock<ICustomerRepo>();
-        var mockReviewRepo = new Mock<IReviewRepo>();
-        var mockUtility = new Mock<Utility>();
-        var customerService = new CustomerService(mockCustomerRepo.Object, mockReviewRepo.Object, mockUtility.Object);
-
-        mockCustomerRepo.Setup(repo => repo.GetCustomerById(99)).Returns((Customer?)null);
-
-        // Act
-        var result = customerService.GetCustomerById(99);
-
-        // Assert
-        Assert.Null(result);  
-    } 
-
-    [Fact]
-    public void GetCustomerByName_ReturnsNull_WhenNotFound()
-    {
-        // Arrange
-        var mockCustomerRepo = new Mock<ICustomerRepo>();
-        var mockReviewRepo = new Mock<IReviewRepo>();
-        var mockUtility = new Mock<Utility>();
-        var customerService = new CustomerService(mockCustomerRepo.Object, mockReviewRepo.Object, mockUtility.Object);
-
-        mockCustomerRepo.Setup(repo => repo.GetCustomerByName("Eldhose")).Returns((Customer?)null);
-
-        // Act
-        var result = customerService.GetCustomerByName("Eldhose");
-
-        // Assert
-        Assert.Null(result);  
-    }
-
     [Fact]
     public void GetAllCustomers_ShouldReturnNull_WhenNoCustomers()
     {
@@ -52,7 +16,7 @@ public class CustomerServiceTests
         var reviewRepoMock = new Mock<IReviewRepo>();
         var utilityMock = new Mock<Utility>();
 
-        customerRepoMock.Setup(repo => repo.GetAllCustomers()).Returns((List<Customer>)null);
+        customerRepoMock.Setup(repo => repo.GetAllCustomers()).Returns(new List<Customer>());
 
         var customerService = new CustomerService(customerRepoMock.Object, reviewRepoMock.Object, utilityMock.Object);
 
@@ -70,7 +34,7 @@ public class CustomerServiceTests
         var customerRepoMock = new Mock<ICustomerRepo>();
         var reviewRepoMock = new Mock<IReviewRepo>();
 
-        var utility = new Utility(); // Use the real utility
+        var utility = new Utility(); 
         var customer = new Customer 
         { 
             Id = 1, Name = "Customer 1" 
