@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Pley.API.DTO;
 using Pley.API.Service;
+using System.Security.Claims;
 
 namespace Pley.API.Controller;
 
@@ -49,10 +50,8 @@ public class StoresController : ControllerBase
         try
          {
             var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var name1 = User.Identity.Name;
-
             var store = _storeService.GetStoreById(int.Parse(userID));
-            //var store = _storeService.GetStoreById(id);
+
             var updatedStore = _storeService.UpdateLogin(store, loginInDTO);
             return Ok(updatedStore);
         }
@@ -60,10 +59,9 @@ public class StoresController : ControllerBase
         {
             return BadRequest(e.Message);
         }
-
     }
 
-    [Authorize]
+    //[Authorize]
     [HttpGet("{id}")]
     public IActionResult GetStoreById(int id)
     {
@@ -107,6 +105,14 @@ public class StoresController : ControllerBase
     {
         try
         {
+            var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var store = _storeService.GetStoreById(int.Parse(userID));
+            if (int.Parse(userID) != id)
+            {
+                return Unauthorized("You do not have permission to make this update.");
+            }
+
             var updatedStore = _storeService.UpdateStore(id, editStoreDTO);
             return Ok(updatedStore);
         }
