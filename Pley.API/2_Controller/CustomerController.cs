@@ -59,24 +59,22 @@ public class CustomersController : ControllerBase
         }
     }
 
-    // [Authorize]
-    // [HttpPost("{storeId}/{customerId}/reviews")]
-    // public IActionResult CreateNewReview(int storeId, int customerId, [FromBody] ReviewInDTO reviewIn)
-    // {
-    //     try
-    //     {
-    //         //var review = _reviewService.CreateNewReview(storeId, customerId, reviewIn);
-    //         if (review == null)
-    //         {
-    //             return BadRequest("Invalid input");
-    //         }
-    //         return Ok(review);
-    //     }
-    //     catch (Exception e)
-    //     {
-    //         return BadRequest(e.Message);
-    //     }
-    // }
+    [Authorize]
+    [HttpPost("{customerId}/reviews")]
+    public IActionResult CreateNewReview(int customerId, [FromBody] ReviewInDTO reviewIn)
+    {
+        try
+        {
+            var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var review = _reviewService.CreateNewReview(int.Parse(userID), customerId, reviewIn);
+
+            return Ok(review);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
 
     [Authorize]
     [HttpGet("name/{name}")]
