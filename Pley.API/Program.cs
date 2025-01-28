@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Pley.API.Model;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using Pley.API.Service;
 using Pley.API.Repo;
 using Pley.API.Util;
@@ -11,6 +14,27 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = false,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
+    };
+});
+
 
 // Add cbcontext and connect it to connection string
 builder.Services.AddDbContext<PleyContext>(options => 
@@ -27,7 +51,7 @@ builder.Services.AddScoped<IReviewRepo, ReviewRepo>();
 builder.Services.AddScoped<ICustomerRepo, CustomerRepo>();
 
 //Use singleton for utilies
-builder.Services.AddSingleton<Utility>(); 
+builder.Services.AddSingleton<Pley.API.Util.Utility>(); 
 
 //Add controllers
 builder.Services.AddControllers()

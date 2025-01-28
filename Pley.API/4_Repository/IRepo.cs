@@ -5,11 +5,10 @@ namespace Pley.API.Repo;
 public interface IStoreRepo
 {
     Store CreateNewStore(Store newStore); 
-    Store? Login(string userName, string Password);
-    // edit login    // *authentication
+    Store? Login(string userName);
     Store? GetStoreById(int id); 
     Store? DeleteStoreById(Store store);
-    // edit store    // *authentication
+    Store? UpdateStore(Store store);
     IEnumerable<Store> GetAllStores(); 
 }
 
@@ -19,7 +18,7 @@ public interface IReviewRepo
     Review? DeleteReviewById(int id);
     Review UpdateReview(Review existingReview); // guaranteedd not null ever because of controller
     IEnumerable<Review> GetAllReviews(); 
-    // Review CreateNewReview(Review newReview);
+    Review CreateNewReview(Review newReview);
 }
 
 public interface ICustomerRepo

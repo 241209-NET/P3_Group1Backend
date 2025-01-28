@@ -1,6 +1,9 @@
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Pley.API.DTO;
 using Pley.API.Service;
+using System.Security.Claims;
 
 namespace Pley.API.Controller;
 
@@ -31,12 +34,26 @@ public class StoresController : ControllerBase
     {
         try
         {
-            var user = _storeService.Login(loginDTO.Username, loginDTO.Password);
-            if (user == null)
-            {
-                return Unauthorized("Invalid username or password.");
-            }
-            return Ok(user);
+            var result = _storeService.Login(loginDTO.Username, loginDTO.Password);
+            return Ok(result);
+        }
+        catch (Exception)
+        {
+            return BadRequest("Invalid username or password.");
+        }
+    }
+
+    [Authorize]
+    [HttpPatch("login")]
+    public IActionResult UpdateLogin([FromBody] EditLoginInDTO loginInDTO)
+    {
+        try
+         {
+            var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var store = _storeService.GetStoreById(int.Parse(userID));
+
+            var updatedStore = _storeService.UpdateLogin(store, loginInDTO);
+            return Ok(updatedStore);
         }
         catch (Exception e)
         {
@@ -44,11 +61,7 @@ public class StoresController : ControllerBase
         }
     }
 
-    // *authentication   (username, password)
-    // [HttpPatch("login")]
-    // public IActionResult EditLogin(int [FromBody] LoginInDTO)
-
-
+    //[Authorize]
     [HttpGet("{id}")]
     public IActionResult GetStoreById(int id)
     {
@@ -61,38 +74,67 @@ public class StoresController : ControllerBase
             }
             return Ok(store);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             return BadRequest(e.Message);
         }
     }
 
+    [Authorize]
     [HttpDelete("{id}")]
     public IActionResult DeleteStoreById(int id)
     {
         try
         {
-            var store = _storeService.DeleteStoreById(id);
+            var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var store = _storeService.DeleteStoreById(int.Parse(userID));
             if (store == null)
             {
                 return NotFound($"No store found with Id {id}");
             }
+
+            if (id != int.Parse(userID))
+                return Unauthorized("You do not have permission to perform this action.");
+
+
             return Ok($"Successfully deleted store {id}");
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             return BadRequest(e.Message);
         }
     }
 
-    // *authentication
-    // patch store details: Name, Description, URL
+    [Authorize]
+    [HttpPatch("{id}")]
+    public IActionResult UpdateStore(int id, [FromBody] EditStoreDTO editStoreDTO)
+    {
+        try
+        {
+            var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
+            var store = _storeService.GetStoreById(int.Parse(userID));
+            if (int.Parse(userID) != id)
+            {
+                return Unauthorized("You do not have permission to perform this action.");
+            }
+
+            var updatedStore = _storeService.UpdateStore(id, editStoreDTO);
+            return Ok(updatedStore);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    //[Authorize]
     [HttpGet]
     public IActionResult GetAllStores()
     {
         var userList = _storeService.GetAllStores();
-        if(userList is null || !userList.Any()) 
+        if (userList is null || !userList.Any())
         {
             return NotFound("No stores found");
         }

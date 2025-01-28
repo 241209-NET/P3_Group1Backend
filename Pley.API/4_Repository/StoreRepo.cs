@@ -15,14 +15,10 @@ public class StoreRepo : IStoreRepo
         return newStore;
     }
 
-    // *authentication
-    public Store Login(string Username, string Password)
+    public Store Login(string username)
     {
-        throw new NotImplementedException();
+        return _pleyContext.Stores.FirstOrDefault(u => u.Username == username)!;
     }
-
-    // *authentication
-    // edit login
 
     public Store? GetStoreById(int id)
     {
@@ -36,8 +32,12 @@ public class StoreRepo : IStoreRepo
         return store;
     }
 
-    // *authentication
-    // edit store
+    public Store UpdateStore(Store store)
+    {
+        _pleyContext.Stores.Update(store);
+        _pleyContext.SaveChanges();
+        return store;
+    }
 
     public IEnumerable<Store> GetAllStores()
     {
