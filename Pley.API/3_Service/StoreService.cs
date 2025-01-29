@@ -70,7 +70,6 @@ public class StoreService : IStoreService
         return new
         {
             Token = new JwtSecurityTokenHandler().WriteToken(token),
-            User = user
         };
     }
 
@@ -87,6 +86,11 @@ public class StoreService : IStoreService
         }
 
         return _storeRepo.UpdateStore(store);
+    }
+
+    public void Logout(string token)
+    {
+        _storeRepo.BlacklistToken(token);
     }
 
     public Store? GetStoreById(int id)
@@ -129,9 +133,4 @@ public class StoreService : IStoreService
     {
         return _storeRepo.GetAllStores();
     }
-
-    // public Store? Login(string userName, string Password)
-    // {
-    //     return _storeRepo.Login(userName);
-    // }
 }

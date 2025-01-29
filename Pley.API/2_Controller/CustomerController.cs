@@ -43,10 +43,16 @@ public class CustomersController : ControllerBase
     {
         try
         {
+            var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var existingReview = _reviewService.GetReviewById(reviewId);            // get it first to extract storeId and customerId
             if (existingReview == null)
             {
                 return NotFound($"No review found with Id {reviewId}");
+            }
+
+            if (existingReview.StoreId != int.Parse(userID!))
+            {
+                return Unauthorized("You do not have permission to perform this action.");
             }
 
             var editReview = _reviewService.EditReviewById(existingReview, reviewIn);

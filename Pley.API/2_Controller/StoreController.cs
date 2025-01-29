@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Pley.API.DTO;
 using Pley.API.Service;
 using System.Security.Claims;
+using Pley.API.Model;
 
 namespace Pley.API.Controller;
 
@@ -48,12 +49,35 @@ public class StoresController : ControllerBase
     public IActionResult UpdateLogin([FromBody] EditLoginInDTO loginInDTO)
     {
         try
-         {
+        {
             var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var store = _storeService.GetStoreById(int.Parse(userID));
 
             var updatedStore = _storeService.UpdateLogin(store, loginInDTO);
             return Ok(updatedStore);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+
+    [Authorize]
+    [HttpPost("logout")]
+    public IActionResult Logout()
+    {
+        try
+        {
+            var token = Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                return BadRequest("Invalid token.");
+            }
+
+            _storeService.Logout(token);
+            return Ok("Logged out successfully.");
         }
         catch (Exception e)
         {

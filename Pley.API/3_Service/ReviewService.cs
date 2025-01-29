@@ -49,7 +49,20 @@ public class ReviewService : IReviewService
 
     public IEnumerable<Review> GetAllReviews()
     {
-        return _reviewRepo.GetAllReviews();
+        var reviews = _reviewRepo.GetAllReviews();
+
+        foreach (var review in reviews)
+        {
+            var customer = review.Customer;
+            var custReviews = reviews.Where(r => r.CustomerId == customer.Id);
+
+            customer.Reviews = custReviews.ToList();
+
+            customer.AvgRating = _utility.GetAvgRating(customer.Reviews);
+            //Console.WriteLine($"Customer reviews: {customer.Reviews.Count} ");
+        }
+
+        return reviews;
     }
 
     public Review CreateNewReview(int storeId, int customerId, ReviewInDTO newReview)
@@ -65,7 +78,12 @@ public class ReviewService : IReviewService
             throw new ArgumentException("Invalid Customer.");
 
         var reviewDTO = _utility.ReviewInDTOToReview(newReview, customerId, storeId);
-        var review = _reviewRepo.CreateNewReview(reviewDTO);
+        var review = _reviewRepo.CreateNewReview(reviewDTO); 
+        
+        // this SHOULD capture the newly created review as well. 
+        var reviews = GetAllReviews().Where(r => r.CustomerId == customer.Id).ToList();
+        // if not, reviews.Add(reviews); ????
+        review.Customer.AvgRating = _utility.GetAvgRating(reviews);
 
         return review;
     }

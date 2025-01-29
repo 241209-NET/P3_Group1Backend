@@ -10,6 +10,8 @@ public interface IStoreRepo
     Store? DeleteStoreById(Store store);
     Store? UpdateStore(Store store);
     IEnumerable<Store> GetAllStores(); 
+    void BlacklistToken(string token);
+    bool IsTokenBlacklisted(string token);
 }
 
 public interface IReviewRepo
