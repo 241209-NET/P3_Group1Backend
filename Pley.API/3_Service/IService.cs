@@ -5,25 +5,29 @@ namespace Pley.API.Service;
 
 public interface IStoreService
 {
-    StoreOutDTO CreateNewStore(StoreInDTO newStore); 
-    IEnumerable<StoreOutDTO> GetAllStores();
-    StoreOutDTO? GetStoreById(int id); 
-    StoreOutDTO? DeleteStoreById(int id);
-    StoreOutDTO? Login(string userName, string Password);
-    StoreOutDTO? GetStoreByUsername(string username);
+    Store CreateNewStore(SignUpInDTO signUpInDTO);
+    object Login(string username, string password);
+    Store? UpdateLogin(Store store, EditLoginDTO loginInDTO);
+    Store? GetStoreById(int id); 
+    Store? DeleteStoreById(int id);
+    Store? UpdateStore(int id, EditStoreDTO editStoreDTO);
+    IEnumerable<Store> GetAllStores();
+    void Logout(string token);
+    LoginDTO? GetLoginInfo(int id);
 }
 
 public interface IReviewService
 {
-    ReviewOutDTO? GetReviewById(int id);
-    IEnumerable<ReviewOutDTO> GetAllReviews();
-    ReviewOutDTO CreateNewReview(ReviewInDTO newReview);
-    ReviewOutDTO? DeleteReviewById(int id);
+    Review? GetReviewById(int id);
+    Review? DeleteReviewById(int id);
+    Review EditReviewById(Review existingReview, ReviewInDTO reviewIn);     // guaranteedd not null ever because of controller
+    IEnumerable<Review> GetAllReviews();
+    Review CreateNewReview(int storeId, int customerId, ReviewInDTO newReview);   // *authentication
 }
 
 public interface ICustomerService
 {
-    CustomerOutDTO? GetCustomerById(int id);
-    IEnumerable<CustomerOutDTO> GetAllCustomers();
-    CustomerOutDTO CreateNewCustomer(CustomerInDTO customer);
+    IEnumerable<Customer> GetAllCustomers();
+    Customer? GetCustomerById(int id);
+    Customer? GetCustomerByName(string name);
 }

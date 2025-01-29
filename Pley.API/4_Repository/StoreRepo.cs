@@ -1,14 +1,13 @@
 using Pley.API.Model;
 using Pley.API.Data;
-//using Microsoft.EntityFrameworkCore;
 
 namespace Pley.API.Repo;
 
 public class StoreRepo : IStoreRepo
 {
+    private static HashSet<string> _blacklistedTokens = new HashSet<string>();
 
     private readonly PleyContext _pleyContext;
-
     public StoreRepo(PleyContext pleyContext) => _pleyContext = pleyContext;
 
     public Store CreateNewStore(Store newStore)
@@ -18,35 +17,43 @@ public class StoreRepo : IStoreRepo
         return newStore;
     }
 
-    public Store LoginStore(string Username, string Password)
+    public Store Login(string username)
     {
-        throw new NotImplementedException();
+        return _pleyContext.Stores.FirstOrDefault(u => u.Username == username)!;
+    }
+
+    public void BlacklistToken(string token)
+    {
+        _blacklistedTokens.Add(token);
+    }
+
+    public bool IsTokenBlacklisted(string token)
+    {
+        return _blacklistedTokens.Contains(token);
+    }
+
+    public Store? GetStoreById(int id)
+    {
+        return _pleyContext.Stores.Find(id);
+    }
+
+    public Store? DeleteStoreById(Store store)
+    {
+        _pleyContext.Stores.Remove(store);
+        _pleyContext.SaveChanges();
+        return store;
+    }
+
+    public Store UpdateStore(Store store)
+    {
+        _pleyContext.Stores.Update(store);
+        _pleyContext.SaveChanges();
+        return store;
     }
 
     public IEnumerable<Store> GetAllStores()
     {
-        return _pleyContext.Stores;
+        return _pleyContext.Stores.ToList();
     }
 
-    public Store? GetStoreById(int reviewId)
-    {
-        return _pleyContext.Stores.Find(reviewId);
-    }
-
-    public Store? DeleteStoreById(int id)
-    {
-        Store? review = GetStoreById(id);
-        if(review is null) 
-            return null; //throw new StoreNotFoundException();
-
-        // review is not null, proceed
-        _pleyContext.Stores.Remove(review);
-        _pleyContext.SaveChanges();
-        return review;
-    }
-
-    public Store GetStoreByName(string name)
-    {
-        return _pleyContext.Stores.Find(name)!;
-    }
 }

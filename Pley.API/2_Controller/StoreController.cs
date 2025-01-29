@@ -1,3 +1,5 @@
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Pley.API.DTO;
 using Pley.API.Service;
@@ -6,11 +8,11 @@ namespace Pley.API.Controller;
 
 [Route("api/[controller]")]
 [ApiController]
-public class StoreController : ControllerBase
+public class StoresController : ControllerBase
 {
     private readonly IStoreService _storeService;
 
-    public StoreController(IStoreService storeService)
+    public StoresController(IStoreService storeService)
     {
         _storeService = storeService;
     }
@@ -23,101 +25,73 @@ public class StoreController : ControllerBase
             var store = _storeService.GetStoreById(id);
             if (store == null)
             {
-                return NotFound("No store found for id = " + id);
+                return NotFound($"No store found with Id {id}");
             }
             return Ok(store);
         }
-        catch(Exception e)
-        {
-            return BadRequest(e.Message);
-        }
-        
-    }
-    
-    [HttpGet("username/{username}")]
-    public IActionResult GetStoreByUsername(string username)
-    {
-        try
-        {
-            var store = _storeService.GetStoreByUsername(username);
-            if (store == null)
-            {
-                return NotFound("No user found for username = " + username);
-            }
-            return Ok(store);
-        }
-        catch(Exception e)
+        catch (Exception e)
         {
             return BadRequest(e.Message);
         }
     }
-    
 
-    [HttpPost]
-    public IActionResult CreateNewStore([FromBody] StoreInDTO newStoreInDTO)
-    {
-        var store = _storeService.CreateNewStore(newStoreInDTO);
-        if (store == null)
-        {
-            return BadRequest("Invalid input for creating a new store.");
-        }
-        return Ok(store);
-    }
-
+    [Authorize]
     [HttpDelete("{id}")]
     public IActionResult DeleteStoreById(int id)
     {
         try
         {
-            var store = _storeService.DeleteStoreById(id);
+            var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var store = _storeService.DeleteStoreById(int.Parse(userID));
             if (store == null)
             {
-                return NotFound($"No store found to delete for id = " + id);
+                return NotFound($"No store found with Id {id}");
             }
-            return Ok(store);
+
+            if (id != int.Parse(userID))
+                return Unauthorized("You do not have permission to perform this action.");
+
+
+            return Ok($"Successfully deleted store {id}");
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             return BadRequest(e.Message);
         }
     }
 
-    [HttpGet("home")]
-    public IActionResult Home()
-    {
-        return Ok("this works");
+    [Authorize]
+    [HttpPatch("{id}")]
+    public IActionResult UpdateStore(int id, [FromBody] EditStoreDTO editStoreDTO)
+    { 
+        try
+        {
+            var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var store = _storeService.GetStoreById(int.Parse(userID));
+            if (int.Parse(userID) != id)
+            {
+                return Unauthorized("You do not have permission to perform this action.");
+            }
+
+            var updatedStore = _storeService.UpdateStore(id, editStoreDTO);
+            return Ok(updatedStore);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpGet]
     public IActionResult GetAllStores()
     {
         var userList = _storeService.GetAllStores();
-        if(userList is null || !userList.Any()) 
+        if (userList is null || !userList.Any())
         {
-            return NotFound("No stores found.");
+            return NotFound("No stores found");
         }
         return Ok(userList);
     }
-
-    [HttpPost("login")]
-    public IActionResult Login([FromBody] StoreInDTO loginDTO)
-    {
-        try
-        {
-            var user = _storeService.Login(loginDTO.Username, loginDTO.Password);
-            if (user == null)
-            {
-                return Unauthorized("Invalid username or password.");
-            }
-            return Ok(user);
-        }
-        catch(Exception e)
-        {
-            return BadRequest(e.Message);
-        }
-    }
-
-    // edit store
-    // patch - store name, description, URL
-    // patch - username, password
 }

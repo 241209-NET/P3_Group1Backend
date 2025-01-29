@@ -4,42 +4,28 @@ namespace Pley.API.Repo;
 
 public interface IStoreRepo
 {
-
     Store CreateNewStore(Store newStore); 
-
-    IEnumerable<Store> GetAllStores(); 
-
+    Store? Login(string userName);
     Store? GetStoreById(int id); 
-    
-    Store? DeleteStoreById(int id);
-
-    Store? LoginStore(string userName, string Password);
-
-    Store? GetStoreByName(string username);
+    Store? DeleteStoreById(Store store);
+    Store? UpdateStore(Store store);
+    IEnumerable<Store> GetAllStores(); 
+    void BlacklistToken(string token);
+    bool IsTokenBlacklisted(string token);
 }
 
 public interface IReviewRepo
 {
-
     Review? GetReviewById(int id);
-
-    IEnumerable<Review> GetAllReviews(); 
-
     Review? DeleteReviewById(int id);
-
+    Review UpdateReview(Review existingReview); // guaranteedd not null ever because of controller
+    IEnumerable<Review> GetAllReviews(); 
     Review CreateNewReview(Review newReview);
-
 }
 
 public interface ICustomerRepo
 {
-
-    Customer? GetCustomerById(int id);
-
     IEnumerable<Customer> GetAllCustomers(); 
-
-    Customer? DeleteReviewById(int id);
-
-    Customer CreateNewCustomer(Customer newCustomer);
-
+    Customer? GetCustomerById(int id);
+    Customer? GetCustomerByName(string name);
 }
