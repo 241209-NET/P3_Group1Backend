@@ -5,12 +5,21 @@ namespace Pley.API.Util;
 
 public class Utility
 {
-    public Store LoginInDTOToStore(LoginInDTO loginInDTO)
+    public Store LoginInDTOToStore(LoginDTO loginInDTO)
     {
         return new Store
         {
             Username = loginInDTO.Username,
             Password = loginInDTO.Password
+        };
+    }
+
+    public LoginDTO StoreToLoginDTO(Store store)
+    {
+        return new LoginDTO
+        {
+            Username = store.Username!,
+            Password = store.Password!
         };
     }
 
@@ -37,7 +46,7 @@ public class Utility
     }
 
     public double GetAvgRating(List<Review> list)
-    { 
+    {
         double sum = 0;
         foreach (var review in list)
         {

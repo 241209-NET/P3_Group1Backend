@@ -17,73 +17,6 @@ public class StoresController : ControllerBase
         _storeService = storeService;
     }
 
-    [HttpPost("register")]
-    public IActionResult CreateNewStore([FromBody] SignUpInDTO signUpInDTO)
-    {
-        var store = _storeService.CreateNewStore(signUpInDTO);
-        if (store == null)
-        {
-            return BadRequest("Invalid input for creating a new store.");
-        }
-        return Ok(store);
-    }
-
-    [HttpPost("login")]
-    public IActionResult Login([FromBody] LoginInDTO loginDTO)
-    {
-        try
-        {
-            var result = _storeService.Login(loginDTO.Username, loginDTO.Password);
-            return Ok(result);
-        }
-        catch (Exception)
-        {
-            return BadRequest("Invalid username or password.");
-        }
-    }
-
-    [Authorize]
-    [HttpPatch("login/edit")]
-    public IActionResult UpdateLogin([FromBody] EditLoginInDTO loginInDTO)
-    {
-        try
-        {
-            var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var store = _storeService.GetStoreById(int.Parse(userID));
-
-            var updatedStore = _storeService.UpdateLogin(store, loginInDTO);
-            return Ok(updatedStore);
-        }
-        catch (Exception e)
-        {
-            return BadRequest(e.Message);
-        }
-    }
-
-
-    [Authorize]
-    [HttpPost("logout")]
-    public IActionResult Logout()
-    {
-        try
-        {
-            var token = Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
-
-            if (string.IsNullOrWhiteSpace(token))
-            {
-                return BadRequest("Invalid token.");
-            }
-
-            _storeService.Logout(token);
-            return Ok("Logged out successfully.");
-        }
-        catch (Exception e)
-        {
-            return BadRequest(e.Message);
-        }
-    }
-
-    //[Authorize]
     [HttpGet("{id}")]
     public IActionResult GetStoreById(int id)
     {
@@ -151,7 +84,6 @@ public class StoresController : ControllerBase
         }
     }
 
-    //[Authorize]
     [HttpGet]
     public IActionResult GetAllStores()
     {

@@ -7,13 +7,13 @@ public interface IStoreService
 {
     Store CreateNewStore(SignUpInDTO signUpInDTO);
     object Login(string username, string password);
-    Store? UpdateLogin(Store store, EditLoginInDTO loginInDTO);
+    Store? UpdateLogin(Store store, EditLoginDTO loginInDTO);
     Store? GetStoreById(int id); 
     Store? DeleteStoreById(int id);
     Store? UpdateStore(int id, EditStoreDTO editStoreDTO);
     IEnumerable<Store> GetAllStores();
-
     void Logout(string token);
+    LoginDTO? GetLoginInfo(int id);
 }
 
 public interface IReviewService

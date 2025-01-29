@@ -1,13 +1,13 @@
 
 namespace Pley.API.DTO;
 
-public class LoginInDTO
+public class LoginDTO
 {
     public required string Username { get; set; }
     public required string Password { get; set; }
 }
 
-public class EditLoginInDTO
+public class EditLoginDTO
 {
     public string? Username { get; set; }
     public string? Password { get; set; }

@@ -46,7 +46,7 @@ builder.Services.AddAuthentication(options =>
 
                 if (storeRepo.IsTokenBlacklisted(token))
                 {
-                    context.Fail("Token has been revoked.");
+                    throw new UnauthorizedAccessException("Token has been revoked.");
                 }
             }
         }
