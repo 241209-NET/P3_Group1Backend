@@ -6,7 +6,6 @@ using Microsoft.IdentityModel.Tokens;
 using Pley.API.Repo;
 using Pley.API.Util;
 using Pley.API.Model;
-using BCrypt.Net;
 
 namespace Pley.API.Service;
 
@@ -73,7 +72,7 @@ public class StoreService : IStoreService
         };
     }
 
-    public Store? UpdateLogin(Store store, EditLoginInDTO loginInDTO)
+    public Store? UpdateLogin(Store store, EditLoginDTO loginInDTO)
     {
 
         if (!string.IsNullOrWhiteSpace(loginInDTO.Username))
@@ -132,5 +131,11 @@ public class StoreService : IStoreService
     public IEnumerable<Store> GetAllStores()
     {
         return _storeRepo.GetAllStores();
+    }
+
+    public LoginDTO GetLoginInfo(int id){
+        var store = _storeRepo.GetStoreById(id);
+        var dto = _utility.StoreToLoginDTO(store!);
+        return dto;
     }
 }

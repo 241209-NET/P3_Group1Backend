@@ -5,8 +5,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Pley.API.Service;
 using Pley.API.Repo;
-using Pley.API.Util;
 using Pley.API.Data;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,8 +14,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-
 
 builder.Services.AddAuthentication(options =>
 {
@@ -46,12 +44,26 @@ builder.Services.AddAuthentication(options =>
 
                 if (storeRepo.IsTokenBlacklisted(token))
                 {
-                    context.Fail("Token has been revoked.");
+                    context.Fail("Token is revoked.");
+                    return;
                 }
             }
+        },
+        OnChallenge = async context =>
+        {
+            if (!context.Handled)
+            {
+                context.HandleResponse();
+                context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                context.Response.ContentType = "text/plain";
+
+                await context.Response.WriteAsync("Token is revoked.");
+            }
         }
+
     };
 });
+
 
 
 

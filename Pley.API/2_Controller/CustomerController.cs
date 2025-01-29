@@ -24,11 +24,17 @@ public class CustomersController : ControllerBase
     {
         try
         {
+            var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var deleteReview = _reviewService.DeleteReviewById(reviewId);
+
             if (deleteReview == null)
             {
                 return NotFound($"No review found with Id {reviewId}");
             }
+
+            if (deleteReview.StoreId != int.Parse(userID!))
+                return Unauthorized("You do not have permission to perform this action.");
+
             return Ok($"Successfully deleted review {reviewId}");
         }
         catch (Exception e)
@@ -73,7 +79,7 @@ public class CustomersController : ControllerBase
         {
             var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var review = _reviewService.CreateNewReview(int.Parse(userID), customerId, reviewIn);
-
+            
             return Ok(review);
         }
         catch (Exception e)
@@ -82,7 +88,6 @@ public class CustomersController : ControllerBase
         }
     }
 
-    [Authorize]
     [HttpGet("name/{name}")]
     public IActionResult GetCustomerByName(string name)
     {
