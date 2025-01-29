@@ -6,6 +6,7 @@ using System.Text;
 using Pley.API.Service;
 using Pley.API.Repo;
 using Pley.API.Data;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,12 +44,26 @@ builder.Services.AddAuthentication(options =>
 
                 if (storeRepo.IsTokenBlacklisted(token))
                 {
-                    throw new UnauthorizedAccessException("Token has been revoked.");
+                    context.Fail("Token is revoked.");
+                    return;
                 }
             }
+        },
+        OnChallenge = async context =>
+        {
+            if (!context.Handled)
+            {
+                context.HandleResponse();
+                context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                context.Response.ContentType = "text/plain";
+
+                await context.Response.WriteAsync("Token is revoked.");
+            }
         }
+
     };
 });
+
 
 
 
