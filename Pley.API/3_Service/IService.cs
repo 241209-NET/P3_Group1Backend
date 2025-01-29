@@ -12,6 +12,8 @@ public interface IStoreService
     Store? DeleteStoreById(int id);
     Store? UpdateStore(int id, EditStoreDTO editStoreDTO);
     IEnumerable<Store> GetAllStores();
+
+    void Logout(string token);
 }
 
 public interface IReviewService

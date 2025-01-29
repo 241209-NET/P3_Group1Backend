@@ -5,6 +5,8 @@ namespace Pley.API.Repo;
 
 public class StoreRepo : IStoreRepo
 {
+    private static HashSet<string> _blacklistedTokens = new HashSet<string>();
+
     private readonly PleyContext _pleyContext;
     public StoreRepo(PleyContext pleyContext) => _pleyContext = pleyContext;
 
@@ -18,6 +20,16 @@ public class StoreRepo : IStoreRepo
     public Store Login(string username)
     {
         return _pleyContext.Stores.FirstOrDefault(u => u.Username == username)!;
+    }
+
+    public void BlacklistToken(string token)
+    {
+        _blacklistedTokens.Add(token);
+    }
+
+    public bool IsTokenBlacklisted(string token)
+    {
+        return _blacklistedTokens.Contains(token);
     }
 
     public Store? GetStoreById(int id)
