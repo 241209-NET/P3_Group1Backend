@@ -5,7 +5,6 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Pley.API.Service;
 using Pley.API.Repo;
-using Pley.API.Util;
 using Pley.API.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,8 +13,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-
 
 builder.Services.AddAuthentication(options =>
 {

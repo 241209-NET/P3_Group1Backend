@@ -86,17 +86,13 @@ public class AccountController : ControllerBase
   [HttpGet]
   public IActionResult GetLoginInfo()
   {
-    try{
-      var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
-      var loginInfo = _storeService.GetLoginInfo(int.Parse(userID!));
-      if (loginInfo == null)
-      {
-        return Unauthorized("You must be logged in to access the account.");
-      }
-      return Ok(loginInfo);
-    } catch(Exception e){
-      return Unauthorized(e.Message);
+    var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+    var loginInfo = _storeService.GetLoginInfo(int.Parse(userID!));
+    if (loginInfo == null)
+    {
+      return Unauthorized("You must be logged in to access the account.");
     }
+    return Ok(loginInfo);
   }
 
 }
