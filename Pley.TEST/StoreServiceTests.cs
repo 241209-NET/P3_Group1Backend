@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Configuration;
 using Moq;
 using Pley.API.DTO;
 using Pley.API.Model;
@@ -14,7 +15,11 @@ public class StoreServiceTests
     {
         // Arrange
         var storeRepoMock = new Mock<IStoreRepo>();
+        var configurationMock = new Mock<IConfiguration>();
         var utility = new Utility(); 
+
+        configurationMock.Setup(config => config["Jwt:Key"]).Returns("TestJwtKey");
+        configurationMock.Setup(config => config["Jwt:Issuer"]).Returns("TestIssuer");
 
         var store = new Store
         { 
@@ -23,7 +28,7 @@ public class StoreServiceTests
 
         storeRepoMock.Setup(repo => repo.GetStoreById(It.IsAny<int>())).Returns(store);
 
-        var storeService = new StoreService(storeRepoMock.Object, utility);
+        var storeService = new StoreService(storeRepoMock.Object, utility, configurationMock.Object);
 
         // Act
         var result = storeService.GetStoreById(1);
@@ -38,11 +43,12 @@ public class StoreServiceTests
     {
         // Arrange
         var storeRepoMock = new Mock<IStoreRepo>();
+        var configurationMock = new Mock<IConfiguration>();
         var utility = new Utility(); 
 
         storeRepoMock.Setup(repo => repo.GetStoreById(It.IsAny<int>())).Returns((Store?)null);
 
-        var storeService = new StoreService(storeRepoMock.Object, utility);
+        var storeService = new StoreService(storeRepoMock.Object, utility, configurationMock.Object);
 
         // Act
         var result = storeService.GetStoreById(99);
@@ -56,11 +62,12 @@ public class StoreServiceTests
     {
         // Arrange
         var storeRepoMock = new Mock<IStoreRepo>();
+        var configurationMock = new Mock<IConfiguration>();
         var utility = new Utility();
 
         storeRepoMock.Setup(repo => repo.GetStoreById(It.IsAny<int>())).Returns((Store?)null);
 
-        var storeService = new StoreService(storeRepoMock.Object, utility);
+        var storeService = new StoreService(storeRepoMock.Object, utility, configurationMock.Object);
 
         // Act
         var result = storeService.DeleteStoreById(99);
@@ -74,6 +81,7 @@ public class StoreServiceTests
     {
         // Arrange
         var storeRepoMock = new Mock<IStoreRepo>();
+        var configurationMock = new Mock<IConfiguration>();
         var utility = new Utility();
 
         var store = new Store 
@@ -85,7 +93,7 @@ public class StoreServiceTests
         storeRepoMock.Setup(repo => repo.DeleteStoreById(It.Is<Store>(s => s.Id == 1))).Returns(store);
 
 
-        var storeService = new StoreService(storeRepoMock.Object, utility);
+        var storeService = new StoreService(storeRepoMock.Object, utility, configurationMock.Object);
 
         // Act
         var result = storeService.DeleteStoreById(1);
@@ -102,6 +110,7 @@ public class StoreServiceTests
     {
         // Arrange
         var storeRepoMock = new Mock<IStoreRepo>();
+        var configurationMock = new Mock<IConfiguration>();
         var utility = new Utility();
         var newStoreDTO = new SignUpInDTO  
         { 
@@ -115,7 +124,7 @@ public class StoreServiceTests
         
         storeRepoMock.Setup(repo => repo.CreateNewStore(It.IsAny<Store>())).Returns(store);
 
-        var storeService = new StoreService(storeRepoMock.Object, utility);
+        var storeService = new StoreService(storeRepoMock.Object, utility, configurationMock.Object);
 
         // Act
         var result = storeService.CreateNewStore(newStoreDTO);
