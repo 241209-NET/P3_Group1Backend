@@ -78,7 +78,12 @@ public class ReviewService : IReviewService
             throw new ArgumentException("Invalid Customer.");
 
         var reviewDTO = _utility.ReviewInDTOToReview(newReview, customerId, storeId);
-        var review = _reviewRepo.CreateNewReview(reviewDTO);
+        var review = _reviewRepo.CreateNewReview(reviewDTO); 
+        
+        // this SHOULD capture the newly created review as well. 
+        var reviews = GetAllReviews().Where(r => r.CustomerId == customer.Id).ToList();
+        // if not, reviews.Add(reviews); ????
+        review.Customer.AvgRating = _utility.GetAvgRating(reviews);
 
         return review;
     }
