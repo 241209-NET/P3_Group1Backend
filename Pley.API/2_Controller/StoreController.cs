@@ -133,7 +133,7 @@ public class StoresController : ControllerBase
     [Authorize]
     [HttpPatch("{id}")]
     public IActionResult UpdateStore(int id, [FromBody] EditStoreDTO editStoreDTO)
-    {
+    { 
         try
         {
             var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
