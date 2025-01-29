@@ -70,7 +70,6 @@ public class StoreService : IStoreService
         return new
         {
             Token = new JwtSecurityTokenHandler().WriteToken(token),
-            User = user
         };
     }
 
