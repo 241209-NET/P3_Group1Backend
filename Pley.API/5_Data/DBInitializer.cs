@@ -105,6 +105,12 @@ public static class DbInitializer
           Name = "Justin Timberlake",
           AvgRating = 0,
           URL = "https://media.glamourmagazine.co.uk/photos/6138cc1dfe678a516c68562b/master/w_320%2Cc_limit/78383001-glamour-11may16-getty-b.jpg"
+        },
+        new Customer    // 16
+        {
+          Name = "Nicholas Cage",
+          AvgRating = 0,
+          URL = ""
         }
       };
       context.Customers.AddRange(customers);
