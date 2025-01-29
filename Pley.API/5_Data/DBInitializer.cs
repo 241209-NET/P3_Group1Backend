@@ -110,7 +110,7 @@ public static class DbInitializer
         {
           Name = "Nicholas Cage",
           AvgRating = 0,
-          URL = ""
+          URL = "https://res.cloudinary.com/teepublic/image/private/s--MaA-zJtx--/c_crop,x_10,y_10/c_fit,h_1386/c_crop,g_north_west,h_1260,w_1008,x_111,y_-27/co_rgb:ffffff,e_colorize,u_Misc:One%20Pixel%20Gray/c_scale,g_north_west,h_1260,w_1008/fl_layer_apply,g_north_west,x_0,y_-27/bo_126px_solid_white/e_overlay,fl_layer_apply,h_1260,l_Misc:Art%20Print%20Bumpmap,w_1008/e_shadow,x_6,y_6/c_limit,h_1254,w_1254/c_lpad,g_center,h_1260,w_1260/b_rgb:eeeeee/c_limit,f_auto,h_630,q_auto:good:420,w_630/v1635813138/production/designs/25287243_0.jpg"
         }
       };
       context.Customers.AddRange(customers);
@@ -230,45 +230,29 @@ public static class DbInitializer
         },
         new Review      // 7
         {
-          StoreId = 1,            // GameStop
-          CustomerId = 14,        // Grunch
-          Comment = "After buying game, he gave us a dance show.",
-          Rating = 5,
+          StoreId = 4,           // Starbucks
+          CustomerId = 2,        // Stan Smith
+          Comment = "Alright, but a little arrogant.",
+          Rating = 3,
           LastUpdated = GenerateRandomDate()
         },
         new Review      // 8
         {
-          StoreId = 6,            // Prada 
-          CustomerId = 11,        // Pauly D
-          Comment = "He returns all the merchandise after taking pictures with them.  Terrible!",
-          Rating = 1,
+          StoreId = 2,             // Waffle House
+          CustomerId = 3,          // Roger Smith
+          Comment = "Messier than normal customers.",
+          Rating = 2,
           LastUpdated = GenerateRandomDate()
         },
         new Review      // 9
         {
-          StoreId = 5,            // Paris Baguette
-          CustomerId = 6,         // Tom Selleck
-          Comment = "He is a dreamy customer!!",
+          StoreId = 6,             // Prada
+          CustomerId = 4,          // Kenny Loggins
+          Comment = "He's in the Danger Zone!! but in a good way",
           Rating = 5,
           LastUpdated = GenerateRandomDate()
         },
         new Review      // 10
-        {
-          StoreId = 2,            // Waffle House
-          CustomerId = 6,         // Tom Selleck
-          Comment = "He tips 15%.",
-          Rating = 4,
-          LastUpdated = GenerateRandomDate()
-        },
-        new Review      // 11
-        {
-          StoreId = 2,            // Waffle House
-          CustomerId = 8,         // Eric Cartman
-          Comment = "He was rude to our staff.",
-          Rating = 2,
-          LastUpdated = GenerateRandomDate()
-        },
-        new Review      // 12
         {
           StoreId = 3,            // Costco
           CustomerId = 5,         // Chuck Norris
@@ -276,7 +260,7 @@ public static class DbInitializer
           Rating = 5,
           LastUpdated = GenerateRandomDate()
         },
-        new Review      // 13
+        new Review      // 11
         {
           StoreId = 5,            // Paris Baguette
           CustomerId = 5,         // Chuck Norris 
@@ -284,31 +268,23 @@ public static class DbInitializer
           Rating = 3,
           LastUpdated = GenerateRandomDate()
         },
-        new Review      // 14
+        new Review      // 12
         {
-          StoreId = 4,            // Starbucks
-          CustomerId = 9,         // Arthur Read
-          Comment = "A well-behaved young man.",
+          StoreId = 5,            // Paris Baguette
+          CustomerId = 6,         // Tom Selleck
+          Comment = "He is a dreamy customer!!",
           Rating = 5,
           LastUpdated = GenerateRandomDate()
         },
-        new Review      // 15
+        new Review      // 13
         {
-          StoreId = 6,            // Prada
-          CustomerId = 15,        // Justin Timberlake 
-          Comment = "He is a silly billy.",
+          StoreId = 2,            // Waffle House
+          CustomerId = 6,         // Tom Selleck
+          Comment = "He tips 15%.",
           Rating = 4,
           LastUpdated = GenerateRandomDate()
         },
-        new Review      // 16
-        {
-          StoreId = 4,            // Starbucks
-          CustomerId = 15,        // Justin Timberlake 
-          Comment = "He is alright, I guess.",
-          Rating = 3,
-          LastUpdated = GenerateRandomDate()
-        },
-        new Review      // 17
+        new Review      // 14
         {
           StoreId = 3,            // Costco 
           CustomerId = 7,         // Pam Poovey
@@ -316,7 +292,7 @@ public static class DbInitializer
           Rating = 5,
           LastUpdated = GenerateRandomDate()
         },
-        new Review      // 18
+        new Review      // 15
         {
           StoreId = 2,            // Waffle House
           CustomerId = 7,         // Pam Poovey
@@ -324,7 +300,71 @@ public static class DbInitializer
           Rating = 4,
           LastUpdated = GenerateRandomDate()
         },
+        new Review      // 16
+        {
+          StoreId = 2,            // Waffle House
+          CustomerId = 8,         // Eric Cartman
+          Comment = "He was rude to our staff.",
+          Rating = 2,
+          LastUpdated = GenerateRandomDate()
+        },
+        new Review      // 17
+        {
+          StoreId = 3,            // Costco
+          CustomerId = 8,         // Eric Cartman
+          Comment = "He's a Costco guy!!  Of course he tried our new double chunk chocolate cookie!!",
+          Rating = 4,
+          LastUpdated = GenerateRandomDate()
+        },
+        new Review      // 18
+        {
+          StoreId = 4,            // Starbucks
+          CustomerId = 9,         // Arthur Read
+          Comment = "A well-behaved young man.",
+          Rating = 5,
+          LastUpdated = GenerateRandomDate()
+        },
         new Review      // 19
+        {
+          StoreId = 1,            // GameStop
+          CustomerId = 9,         // Arthur Read
+          Comment = "He is our most powerful GrandMaster Mage.  We are not worthy.",
+          Rating = 5,
+          LastUpdated = GenerateRandomDate()
+        },
+        new Review      // 20
+        {
+          StoreId = 5,             // Paris Baguette
+          CustomerId = 10,         // Caillou Anderson
+          Comment = "SMH!!  He needs to check himself before he wrecks himself!!",
+          Rating = 1,
+          LastUpdated = GenerateRandomDate()
+        },
+        new Review      // 21
+        {
+          StoreId = 6,            // Prada 
+          CustomerId = 11,        // Pauly D
+          Comment = "He returns all the merchandise after taking pictures with them.  Terrible!!",
+          Rating = 1,
+          LastUpdated = GenerateRandomDate()
+        },
+        new Review      // 22
+        {
+          StoreId = 3,            // Costco 
+          CustomerId = 11,        // Pauly D
+          Comment = "He comes here just to eat all the samples and never buys anything.",
+          Rating = 1,
+          LastUpdated = GenerateRandomDate()
+        },
+        new Review      // 23
+        {
+          StoreId = 1,            // GameStop 
+          CustomerId = 11,        // Pauly D
+          Comment = "He's a chill guy.  He hangs out here a lot.  Minus points for wearing sunglasses inside.",
+          Rating = 2,
+          LastUpdated = GenerateRandomDate()
+        },
+        new Review      // 24
         {
           StoreId = 3,             // Costco
           CustomerId = 12,         // Chevy Chase
@@ -332,12 +372,52 @@ public static class DbInitializer
           Rating = 4,
           LastUpdated = GenerateRandomDate()
         },
-        new Review      // 20
+        new Review      // 25
         {
-          StoreId = 2,             // Waffle House
-          CustomerId = 3,          // Roger Smith
-          Comment = "Messier than normal customers.",
-          Rating = 2,
+          StoreId = 5,             // Paris Baguette
+          CustomerId = 13,         // Robbie Rotten
+          Comment = "He is number 1!!",
+          Rating = 1,
+          LastUpdated = GenerateRandomDate()
+        },
+        new Review      // 26
+        {
+          StoreId = 1,            // GameStop
+          CustomerId = 14,        // Grunch
+          Comment = "After buying game, he gave us a dance show.",
+          Rating = 5,
+          LastUpdated = GenerateRandomDate()
+        },
+        new Review      // 27
+        {
+          StoreId = 6,            // Prada
+          CustomerId = 15,        // Justin Timberlake 
+          Comment = "He is a silly billy.",
+          Rating = 4,
+          LastUpdated = GenerateRandomDate()
+        },
+        new Review      // 28
+        {
+          StoreId = 4,            // Starbucks
+          CustomerId = 15,        // Justin Timberlake 
+          Comment = "He is alright, I guess.",
+          Rating = 3,
+          LastUpdated = GenerateRandomDate()
+        },
+        new Review      // 29
+        {
+          StoreId = 1,            // GameStop
+          CustomerId = 16,        // Nicholas cage 
+          Comment = "He is insane in membrane, but we are entertained.",
+          Rating = 3,
+          LastUpdated = GenerateRandomDate()
+        },
+        new Review      // 30
+        {
+          StoreId = 3,            // Costco
+          CustomerId = 16,        // Nicholas cage 
+          Comment = "He got the crazy eyes!!",
+          Rating = 1,
           LastUpdated = GenerateRandomDate()
         }
       };
