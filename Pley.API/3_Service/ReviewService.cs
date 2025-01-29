@@ -49,7 +49,20 @@ public class ReviewService : IReviewService
 
     public IEnumerable<Review> GetAllReviews()
     {
-        return _reviewRepo.GetAllReviews();
+        var reviews = _reviewRepo.GetAllReviews();
+
+        foreach (var review in reviews)
+        {
+            var customer = review.Customer;
+            var custReviews = reviews.Where(r => r.CustomerId == customer.Id);
+
+            customer.Reviews = custReviews.ToList();
+
+            customer.AvgRating = _utility.GetAvgRating(customer.Reviews);
+            //Console.WriteLine($"Customer reviews: {customer.Reviews.Count} ");
+        }
+
+        return reviews;
     }
 
     public Review CreateNewReview(int storeId, int customerId, ReviewInDTO newReview)

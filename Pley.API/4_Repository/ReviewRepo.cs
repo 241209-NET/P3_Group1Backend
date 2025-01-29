@@ -45,7 +45,10 @@ public class ReviewRepo : IReviewRepo
 
     public IEnumerable<Review> GetAllReviews()
     {
-        return _pleyContext.Reviews.Include(r => r.Store).Include(r => r.Customer).ToList();
+        return _pleyContext.Reviews
+            .Include(r => r.Store)
+            .Include(r => r.Customer)
+            .ToList();
     }
 
 
