@@ -49,7 +49,7 @@ public class StoresController : ControllerBase
     public IActionResult UpdateLogin([FromBody] EditLoginInDTO loginInDTO)
     {
         try
-         {
+        {
             var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var store = _storeService.GetStoreById(int.Parse(userID));
 
@@ -63,26 +63,27 @@ public class StoresController : ControllerBase
     }
 
 
-    [Authorize][HttpPost("logout")]
+    [Authorize]
+    [HttpPost("logout")]
     public IActionResult Logout()
-    {    
-        try    
-        {        
+    {
+        try
+        {
             var token = Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
-            
-            if (string.IsNullOrWhiteSpace(token))        
-            {            
-                return BadRequest("Invalid token.");        
-            }      
 
-            _storeService.Logout(token);        
-            return Ok("Logged out successfully.");   
-        }    
-        catch (Exception e)    
-        {        
-            return BadRequest(e.Message);    
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                return BadRequest("Invalid token.");
+            }
+
+            _storeService.Logout(token);
+            return Ok("Logged out successfully.");
         }
-    } 
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
 
     //[Authorize]
     [HttpGet("{id}")]

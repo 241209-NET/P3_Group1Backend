@@ -33,11 +33,30 @@ builder.Services.AddAuthentication(options =>
         ValidIssuer = builder.Configuration["Jwt:Issuer"],
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
     };
+
+    options.Events = new JwtBearerEvents
+    {
+        OnMessageReceived = async context =>
+        {
+            var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+            if (!string.IsNullOrEmpty(token))
+            {
+                using var scope = context.HttpContext.RequestServices.CreateScope();
+                var storeRepo = scope.ServiceProvider.GetRequiredService<IStoreRepo>();
+
+                if (storeRepo.IsTokenBlacklisted(token))
+                {
+                    context.Fail("Token has been revoked.");
+                }
+            }
+        }
+    };
 });
 
 
+
 // Add cbcontext and connect it to connection string
-builder.Services.AddDbContext<PleyContext>(options => 
+builder.Services.AddDbContext<PleyContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("PLEY")));
 
 //Add service dependencies
@@ -51,7 +70,7 @@ builder.Services.AddScoped<IReviewRepo, ReviewRepo>();
 builder.Services.AddScoped<ICustomerRepo, CustomerRepo>();
 
 //Use singleton for utilies
-builder.Services.AddSingleton<Pley.API.Util.Utility>(); 
+builder.Services.AddSingleton<Pley.API.Util.Utility>();
 
 //Add controllers
 builder.Services.AddControllers()
