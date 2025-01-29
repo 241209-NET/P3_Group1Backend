@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Pley.API.DTO;
 using Pley.API.Service;
-using System.Security.Claims;
-using Pley.API.Model;
 
 namespace Pley.API.Controller;
 
@@ -45,7 +43,7 @@ public class StoresController : ControllerBase
     }
 
     [Authorize]
-    [HttpPatch("login")]
+    [HttpPatch("login/edit")]
     public IActionResult UpdateLogin([FromBody] EditLoginInDTO loginInDTO)
     {
         try
