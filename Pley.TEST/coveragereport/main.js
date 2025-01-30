@@ -222,9 +222,9 @@ var assemblies = [
     "name": "Pley.API",
     "classes": [
       { "name": "Pley.API.Service.CustomerService", "rp": "Pley.API_CustomerService.html", "cl": 21, "ucl": 10, "cal": 31, "tl": 58, "cb": 4, "tb": 4, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Pley.API.Service.ReviewService", "rp": "Pley.API_ReviewService.html", "cl": 26, "ucl": 0, "cal": 26, "tl": 57, "cb": 4, "tb": 4, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Pley.API.Service.StoreService", "rp": "Pley.API_StoreService.html", "cl": 16, "ucl": 5, "cal": 21, "tl": 48, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Pley.API.Util.Utility", "rp": "Pley.API_Utility.html", "cl": 16, "ucl": 18, "cal": 34, "tl": 50, "cb": 3, "tb": 6, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Pley.API.Service.ReviewService", "rp": "Pley.API_ReviewService.html", "cl": 48, "ucl": 1, "cal": 49, "tl": 91, "cb": 9, "tb": 10, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Pley.API.Service.StoreService", "rp": "Pley.API_StoreService.html", "cl": 83, "ucl": 8, "cal": 91, "tl": 141, "cb": 21, "tb": 24, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Pley.API.Util.Utility", "rp": "Pley.API_Utility.html", "cl": 27, "ucl": 14, "cal": 41, "tl": 59, "cb": 5, "tb": 6, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
     ]},
 ];
 

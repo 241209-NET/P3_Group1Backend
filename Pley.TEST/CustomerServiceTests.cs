@@ -33,11 +33,11 @@ public class CustomerServiceTests
         // Arrange
         var customerRepoMock = new Mock<ICustomerRepo>();
         var reviewRepoMock = new Mock<IReviewRepo>();
-
         var utility = new Utility(); 
+
         var customer = new Customer 
         { 
-            Id = 1, Name = "Customer 1" 
+            Id = 1, Name = "Eldhose" 
         };
 
         var reviews = new List<Review>
@@ -67,8 +67,8 @@ public class CustomerServiceTests
 
         var customers = new List<Customer>
         {
-            new() { Id = 1, Name = "Customer 1"},
-            new() { Id = 2, Name = "Customer 2" }
+            new() { Id = 1, Name = "Eldhose"},
+            new() { Id = 2, Name = "Salby" }
         };
 
         var reviews = new List<Review>
@@ -92,5 +92,4 @@ public class CustomerServiceTests
         Assert.Equal(4.5, result.First(c => c.Id == 1).AvgRating);
         Assert.Equal(3, result.First(c => c.Id == 2).AvgRating);
     }
-
 }

@@ -14,15 +14,22 @@ public class ReviewServiceTests
     {
        // Arrange
         var mockRepo = new Mock<IReviewRepo>();
+        var mockCustomerRepo = new Mock<ICustomerRepo>();
+        var mockStoreRepo = new Mock<IStoreRepo>();
+        var utility = new Utility();
+
+        var customer1 = new Customer { Id = 1, Name = "Eldhose" };
+        var customer2 = new Customer { Id = 2, Name = "Salby" };
+
         var reviews = new List<Review>
         {
-            new Review { Id = 1, Comment = "Great!", Rating = 5 },
-            new Review { Id = 2, Comment = "Not bad", Rating = 4 }
+            new Review { Id = 1, Comment = "Great!", Rating = 5, CustomerId = 1, Customer = customer1 },
+            new Review { Id = 2, Comment = "Not bad", Rating = 4, CustomerId = 2, Customer = customer2 }
         };
 
         mockRepo.Setup(repo => repo.GetAllReviews()).Returns(reviews);
 
-        var reviewService = new ReviewService(mockRepo.Object, null);
+        var reviewService = new ReviewService(mockRepo.Object, utility, mockCustomerRepo.Object, mockStoreRepo.Object);
 
         // Act
         var result = reviewService.GetAllReviews();
@@ -39,6 +46,10 @@ public class ReviewServiceTests
     {
         //Arrange
         var mockRepo = new Mock<IReviewRepo>();
+        var mockCustomerRepo = new Mock<ICustomerRepo>();
+        var mockStoreRepo = new Mock<IStoreRepo>();
+        var utility = new Utility();
+
         var review = new Review 
         { 
             Id = 1, Comment = "Great!", Rating = 5 
@@ -46,7 +57,7 @@ public class ReviewServiceTests
 
         mockRepo.Setup(repo => repo.GetReviewById(1)).Returns(review);
         
-        var reviewService = new ReviewService(mockRepo.Object, null);
+        var reviewService = new ReviewService(mockRepo.Object, utility, mockCustomerRepo.Object, mockStoreRepo.Object);
         
         // Act
         var result = reviewService.GetReviewById(1);
@@ -63,9 +74,13 @@ public class ReviewServiceTests
     {
         // Arrange
         var mockRepo = new Mock<IReviewRepo>();
+        var mockCustomerRepo = new Mock<ICustomerRepo>();
+        var mockStoreRepo = new Mock<IStoreRepo>();
+        var utility = new Utility();
+
         mockRepo.Setup(repo => repo.GetReviewById(99)).Returns((Review?)null);
         
-        var reviewService = new ReviewService(mockRepo.Object, null);
+        var reviewService = new ReviewService(mockRepo.Object, utility, mockCustomerRepo.Object, mockStoreRepo.Object);
         
         // Act
         var result = reviewService.GetReviewById(99);
@@ -80,6 +95,10 @@ public class ReviewServiceTests
     {
         // Arrange
         var mockRepo = new Mock<IReviewRepo>();
+        var mockCustomerRepo = new Mock<ICustomerRepo>();
+        var mockStoreRepo = new Mock<IStoreRepo>();
+        var utility = new Utility();
+
         var review = new Review 
         { 
             Id = 1, Comment = "Great!", Rating = 5 
@@ -87,7 +106,7 @@ public class ReviewServiceTests
 
         mockRepo.Setup(repo => repo.DeleteReviewById(1)).Returns(review);
         
-        var reviewService = new ReviewService(mockRepo.Object, null);
+        var reviewService = new ReviewService(mockRepo.Object, utility, mockCustomerRepo.Object, mockStoreRepo.Object);
         
         // Act
         var result = reviewService.DeleteReviewById(1);
@@ -103,9 +122,13 @@ public class ReviewServiceTests
     {
         // Arrange
         var mockRepo = new Mock<IReviewRepo>();
+        var mockCustomerRepo = new Mock<ICustomerRepo>();
+        var mockStoreRepo = new Mock<IStoreRepo>();
+        var utility = new Utility();
+
         mockRepo.Setup(repo => repo.DeleteReviewById(999)).Returns((Review?)null);
         
-        var reviewService = new ReviewService(mockRepo.Object, null);
+        var reviewService = new ReviewService(mockRepo.Object, utility, mockCustomerRepo.Object, mockStoreRepo.Object);
         
         // Act
         var result = reviewService.DeleteReviewById(99);
@@ -118,6 +141,11 @@ public class ReviewServiceTests
     public void EditReviewById_UpdatesRating_Test()
     {
         // Arrange
+        var mockCustomerRepo = new Mock<ICustomerRepo>();
+        var mockStoreRepo = new Mock<IStoreRepo>();
+        var utility = new Utility();
+        var mockRepo = new Mock<IReviewRepo>();
+
         var existingReview = new Review 
         { 
             Id = 1, Comment = "Great", Rating = 3 
@@ -128,10 +156,9 @@ public class ReviewServiceTests
             Rating = 5 
         };  
         
-        var mockRepo = new Mock<IReviewRepo>();
         mockRepo.Setup(repo => repo.UpdateReview(It.IsAny<Review>())).Returns((Review r) => r);
         
-        var reviewService = new ReviewService(mockRepo.Object, null);
+        var reviewService = new ReviewService(mockRepo.Object, utility, mockCustomerRepo.Object, mockStoreRepo.Object);
         
         // Act
         var result = reviewService.EditReviewById(existingReview, reviewInDTO);
@@ -145,6 +172,11 @@ public class ReviewServiceTests
     public void EditReviewById_UpdatesComment_Test()
     {
         // Arrange
+        var mockCustomerRepo = new Mock<ICustomerRepo>();
+        var mockStoreRepo = new Mock<IStoreRepo>();
+        var utility = new Utility();
+        var mockRepo = new Mock<IReviewRepo>();
+
         var existingReview = new Review 
         { 
             Id = 1, Comment = "Old Comment", Rating = 3 
@@ -154,10 +186,9 @@ public class ReviewServiceTests
             Comment = "Updated Comment" 
         };  
         
-        var mockRepo = new Mock<IReviewRepo>();
         mockRepo.Setup(repo => repo.UpdateReview(It.IsAny<Review>())).Returns((Review r) => r);
         
-        var reviewService = new ReviewService(mockRepo.Object, null);
+        var reviewService = new ReviewService(mockRepo.Object, utility, mockCustomerRepo.Object, mockStoreRepo.Object);
         
         // Act
         var result = reviewService.EditReviewById(existingReview, reviewInDTO);
@@ -166,4 +197,74 @@ public class ReviewServiceTests
         Assert.Equal("Updated Comment", result.Comment);  
         Assert.Equal(3, result.Rating);  
     }
+
+    [Fact]
+    public void CreateNewReview_Test()
+    {
+        // Arrange
+        var mockRepo = new Mock<IReviewRepo>();
+        var mockCustomerRepo = new Mock<ICustomerRepo>();
+        var mockStoreRepo = new Mock<IStoreRepo>();
+        var utility = new Utility();
+
+        var customer = new Customer { Id = 1, Name = "Eldhose" };
+        var store = new Store { Id = 1, Name = "Store1" };
+        
+        var reviewInDTO = new ReviewInDTO { Rating = 5, Comment = "Excellent!" };
+
+        // Set up mock repositories
+        mockStoreRepo.Setup(repo => repo.GetStoreById(1)).Returns(store);
+        mockCustomerRepo.Setup(repo => repo.GetCustomerById(1)).Returns(customer);
+
+        var review = new Review
+        {
+            Id = 1,
+            Comment = "Excellent!",
+            Rating = 5,
+            CustomerId = 1,
+            StoreId = 1,
+            Customer = customer,
+            Store = store
+        };
+
+        mockRepo.Setup(repo => repo.CreateNewReview(It.IsAny<Review>())).Returns(review);
+    
+        var reviewService = new ReviewService(mockRepo.Object, utility, mockCustomerRepo.Object, mockStoreRepo.Object);
+
+        // Act
+        var result = reviewService.CreateNewReview(1, 1, reviewInDTO);
+
+        // Assert
+        Assert.NotNull(result);
+        Assert.Equal(5, result.Rating);
+        Assert.Equal("Excellent!", result.Comment);
+        Assert.Equal(1, result.CustomerId);
+        Assert.Equal(1, result.StoreId);
+    }
+
+    [Fact]
+    public void CreateNewReview_StoreDoesNotExist_Test()
+    {
+        // Arrange
+        var mockRepo = new Mock<IReviewRepo>();
+        var mockCustomerRepo = new Mock<ICustomerRepo>();
+        var mockStoreRepo = new Mock<IStoreRepo>();
+        var utility = new Utility();
+
+        var customer = new Customer { Id = 1, Name = "Eldhose" };
+        Store? store = null;  // Store is null
+        var reviewInDTO = new ReviewInDTO { Rating = 5, Comment = "Excellent!" };
+
+        mockStoreRepo.Setup(repo => repo.GetStoreById(1)).Returns(store);
+        mockCustomerRepo.Setup(repo => repo.GetCustomerById(1)).Returns(customer);
+
+        var reviewService = new ReviewService(mockRepo.Object, utility, mockCustomerRepo.Object, mockStoreRepo.Object);
+
+        // Act
+        var exception = Assert.Throws<ArgumentException>(() => reviewService.CreateNewReview(1, 1, reviewInDTO));
+        
+        //Assert
+        Assert.Equal("Invalid Store.", exception.Message);
+    }
+
 }
