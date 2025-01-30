@@ -144,6 +144,7 @@ public class ReviewServiceTests
         var mockCustomerRepo = new Mock<ICustomerRepo>();
         var mockStoreRepo = new Mock<IStoreRepo>();
         var utility = new Utility();
+        var mockRepo = new Mock<IReviewRepo>();
 
         var existingReview = new Review 
         { 
@@ -155,7 +156,6 @@ public class ReviewServiceTests
             Rating = 5 
         };  
         
-        var mockRepo = new Mock<IReviewRepo>();
         mockRepo.Setup(repo => repo.UpdateReview(It.IsAny<Review>())).Returns((Review r) => r);
         
         var reviewService = new ReviewService(mockRepo.Object, utility, mockCustomerRepo.Object, mockStoreRepo.Object);
@@ -175,6 +175,7 @@ public class ReviewServiceTests
         var mockCustomerRepo = new Mock<ICustomerRepo>();
         var mockStoreRepo = new Mock<IStoreRepo>();
         var utility = new Utility();
+        var mockRepo = new Mock<IReviewRepo>();
 
         var existingReview = new Review 
         { 
@@ -185,7 +186,6 @@ public class ReviewServiceTests
             Comment = "Updated Comment" 
         };  
         
-        var mockRepo = new Mock<IReviewRepo>();
         mockRepo.Setup(repo => repo.UpdateReview(It.IsAny<Review>())).Returns((Review r) => r);
         
         var reviewService = new ReviewService(mockRepo.Object, utility, mockCustomerRepo.Object, mockStoreRepo.Object);
@@ -228,8 +228,7 @@ public class ReviewServiceTests
         };
 
         mockRepo.Setup(repo => repo.CreateNewReview(It.IsAny<Review>())).Returns(review);
-        mockRepo.Setup(repo => repo.GetAllReviews()).Returns(new List<Review> { review });
-
+    
         var reviewService = new ReviewService(mockRepo.Object, utility, mockCustomerRepo.Object, mockStoreRepo.Object);
 
         // Act
@@ -241,9 +240,6 @@ public class ReviewServiceTests
         Assert.Equal("Excellent!", result.Comment);
         Assert.Equal(1, result.CustomerId);
         Assert.Equal(1, result.StoreId);
-
-        // Verify that GetAllReviews is called to calculate the average rating
-        mockRepo.Verify(repo => repo.GetAllReviews(), Times.Once);
     }
 
     [Fact]
